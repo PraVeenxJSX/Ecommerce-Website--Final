@@ -6,18 +6,12 @@ const sendEmail = async ({ to, subject, html }) => {
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: process.env.EMAIL_PASS, // ⚠️ Use Gmail App Password here
       },
     });
 
     // verify transporter configuration
-    transporter.verify((err, success) => {
-      if (err) {
-        console.error('Nodemailer verify failed:', err);
-      } else {
-        console.log('Nodemailer transporter verified');
-      }
-    });
+    await transporter.verify();
 
     const info = await transporter.sendMail({
       from: `"MERN Shop" <${process.env.EMAIL_USER}>`,

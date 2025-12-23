@@ -9,8 +9,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-// Allowed origins come from `FRONTEND_URLS` (comma-separated) or fall back
-// to the single production frontend URL. Localhost origins removed as requested.
+// Allowed origins
 const allowedOrigins = (process.env.FRONTEND_URLS || 'https://ecommerce-website-final-frontend.onrender.com')
   .split(',')
   .map((s) => s.trim())
@@ -27,7 +26,6 @@ app.use(
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
