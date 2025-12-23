@@ -9,6 +9,9 @@ exports.registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    // TEMP DEBUG: log incoming register attempts (remove in production)
+    console.log('Register attempt:', { name, email, passwordLength: password ? password.length : 0 });
+
     if (!validator.isEmail(email)) {
       return res.status(400).json({ message: "Invalid email" });
     }
