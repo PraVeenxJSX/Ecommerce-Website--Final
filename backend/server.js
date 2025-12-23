@@ -9,19 +9,17 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-  'https://ecommerce-website-final-frontend.onrender.com'
-  
-];
+// Allowed origins come from `FRONTEND_URLS` (comma-separated) or fall back
+// to the single production frontend URL. Localhost origins removed as requested.
+const allowedOrigins = (process.env.FRONTEND_URLS || 'https://ecommerce-website-final-frontend.onrender.com')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true);
-      return callback(new Error('CORS policy: Origin not allowed'));
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
 );
