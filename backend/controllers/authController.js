@@ -8,7 +8,7 @@ const validator = require("validator");
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    console.log("registerUser endpoint hit");
     console.log('Register attempt:', { name, email, passwordLength: password ? password.length : 0 });
 
     if (!validator.isEmail(email)) {
