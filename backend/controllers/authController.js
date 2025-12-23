@@ -31,6 +31,9 @@ exports.registerUser = async (req, res) => {
         userExists.otpExpires = Date.now() + 10 * 60 * 1000;
         await userExists.save();
 
+        // TEMP DEBUG: log OTP so we can verify delivery in server logs (remove in production)
+        console.log(`OTP resent for ${email}: ${otp}`);
+
         // respond early so UI isn't blocked by email delivery
         res.status(200).json({ message: 'OTP resent to email' });
 
@@ -57,6 +60,9 @@ exports.registerUser = async (req, res) => {
       otpExpires: Date.now() + 10 * 60 * 1000,
       isVerified: false,
     });
+
+    // TEMP DEBUG: log OTP so we can verify delivery in server logs (remove in production)
+    console.log(`OTP created for ${email}: ${otp}`);
 
     // respond early so UI isn't blocked by email delivery
     res.status(201).json({ message: 'OTP sent to email' });
