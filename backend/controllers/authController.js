@@ -21,7 +21,23 @@ exports.registerUser = async (req, res) => {
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+      // If user exists but is not verified, resend OTP instead of blocking
+      if (!userExists.isVerified) {
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        userExists.otp = otp;
+        userExists.otpExpires = Date.now() + 10 * 60 * 1000;
+        await userExists.save();
+
+        await sendEmail({
+          to: email,
+          subject: 'Verify your email',
+          html: `<h2>Your OTP: ${otp}</h2><p>Valid for 10 minutes</p>`,
+        });
+
+        return res.status(200).json({ message: 'OTP resent to email' });
+      }
+
+      return res.status(400).json({ message: 'User already exists' });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -37,11 +53,11 @@ exports.registerUser = async (req, res) => {
 
     await sendEmail({
       to: email,
-      subject: "Verify your email",
+      subject: 'Verify your email',
       html: `<h2>Your OTP: ${otp}</h2><p>Valid for 10 minutes</p>`,
     });
 
-    res.status(201).json({ message: "OTP sent to email" });
+    res.status(201).json({ message: 'OTP sent to email' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
