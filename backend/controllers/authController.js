@@ -31,13 +31,17 @@ exports.registerUser = async (req, res) => {
         userExists.otpExpires = Date.now() + 10 * 60 * 1000;
         await userExists.save();
 
-        await sendEmail({
+        // respond early so UI isn't blocked by email delivery
+        res.status(200).json({ message: 'OTP resent to email' });
+
+        // send email asynchronously (log errors)
+        sendEmail({
           to: email,
           subject: 'Verify your email',
           html: `<h2>Your OTP: ${otp}</h2><p>Valid for 10 minutes</p>`,
-        });
+        }).catch((err) => console.error('Error sending OTP email (resend):', err));
 
-        return res.status(200).json({ message: 'OTP resent to email' });
+        return;
       }
 
       return res.status(400).json({ message: 'User already exists' });
@@ -54,13 +58,15 @@ exports.registerUser = async (req, res) => {
       isVerified: false,
     });
 
-    await sendEmail({
+    // respond early so UI isn't blocked by email delivery
+    res.status(201).json({ message: 'OTP sent to email' });
+
+    // send email asynchronously (log errors)
+    sendEmail({
       to: email,
       subject: 'Verify your email',
       html: `<h2>Your OTP: ${otp}</h2><p>Valid for 10 minutes</p>`,
-    });
-
-    res.status(201).json({ message: 'OTP sent to email' });
+    }).catch((err) => console.error('Error sending OTP email:', err));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
