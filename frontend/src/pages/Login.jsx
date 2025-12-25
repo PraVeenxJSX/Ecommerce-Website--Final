@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data } = await api.post("/auth/login", {
+      const { data } = await api.post("/users/login", {
         email,
         password,
       });

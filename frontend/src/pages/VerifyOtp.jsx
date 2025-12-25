@@ -22,7 +22,7 @@ const VerifyOtp = () => {
     e.preventDefault();
 
     try {
-      await api.post("/auth/verify-otp", { email, otp });
+      await api.post("/users/verify-otp", { email, otp });
       alert("Email verified successfully");
       navigate("/login");
     } catch (error) {

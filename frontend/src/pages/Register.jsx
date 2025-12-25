@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await api.post("/auth/register", form);
+      await api.post("/users/register", form);
       alert("OTP sent to your email");
       navigate("/verify-otp", { state: { email: form.email } });
     } catch (error) {
