@@ -10,10 +10,11 @@ const app = express();
 app.use(express.json());
 
 // Allowed origins
-const allowedOrigins = (process.env.FRONTEND_URLS || 'https://ecommerce-website-final-frontend.onrender.com')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ecommerce-website-final-frontend.onrender.com"
+];
+
 
 app.use(
   cors({

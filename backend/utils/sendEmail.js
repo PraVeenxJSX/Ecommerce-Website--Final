@@ -1,28 +1,16 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async ({ to, subject, html }) => {
-  console.log("📧 EMAIL CONFIG CHECK:");
-console.log("HOST:", process.env.EMAIL_HOST);
-console.log("PORT:", process.env.EMAIL_PORT);
-console.log("USER:", process.env.EMAIL_USER);
-console.log("PASS EXISTS:", !!process.env.EMAIL_PASS);
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
-  await transporter.sendMail({
-    from: `"MERN Shop" <${process.env.EMAIL_USER}>`,
+  await resend.emails.send({
+    from: "MERN Shop <onboarding@resend.dev>",
     to,
     subject,
     html,
   });
+
+  console.log("✅ EMAIL SENT VIA RESEND TO:", to);
 };
 
 module.exports = sendEmail;
