@@ -3,6 +3,9 @@ const Product = require("../models/Product");
 // GET ALL PRODUCTS
 exports.getProducts = async (req, res) => {
   try {
+    const pageSize = 12;
+    const page = Number(req.query.page) || 1;
+
     const { category } = req.query;
 
     let filter = {};
@@ -14,8 +17,18 @@ exports.getProducts = async (req, res) => {
       };
     }
 
-    const products = await Product.find(filter);
-    res.json(products);
+    const count = await Product.countDocuments(filter);
+    const products = await Product.find(filter)
+      .limit(pageSize)
+      .skip(pageSize * (page - 1))
+      .lean(); // Faster read
+
+    res.json({
+      products,
+      page,
+      pages: Math.ceil(count / pageSize),
+      total: count,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -43,15 +56,15 @@ exports.searchProducts = async (req, res) => {
       return res.json([]);
     }
 
-    const regex = new RegExp(q, "i");
-
-    const products = await Product.find({
-      $or: [
-        { name: { $regex: regex } },
-        { description: { $regex: regex } },
-        { category: { $regex: regex } },
-      ],
-    }).limit(50);
+    // Use text search for performance if query is present
+    // Note: requires text index on Product model
+    const products = await Product.find(
+      { $text: { $search: q } },
+      { score: { $meta: "textScore" } }
+    )
+      .sort({ score: { $meta: "textScore" } })
+      .limit(50)
+      .lean();
 
     res.json(products);
   } catch (error) {

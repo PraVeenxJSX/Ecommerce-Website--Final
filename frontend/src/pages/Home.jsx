@@ -13,8 +13,22 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await api.get("/products");
-      setProducts(data);
+      try {
+        // Fetch top 6 products for each category in parallel
+        const promises = CATEGORIES.map((category) =>
+          api.get(`/products?category=${encodeURIComponent(category)}&limit=6`)
+        );
+
+        const responses = await Promise.all(promises);
+
+        // Combine all fetched products into a single array for display logic
+        // Note: Each response.data is now { products: [...], page, total }
+        const allProducts = responses.flatMap(res => res.data.products);
+
+        setProducts(allProducts);
+      } catch (error) {
+        console.error("Error fetching homepage products:", error);
+      }
     };
     fetchProducts();
   }, []);
@@ -23,7 +37,7 @@ const Home = () => {
     <>
       <CategoryBar />
       <HomeBanner />
-  <Deals />
+      <Deals />
 
       <div className="p-6 space-y-12">
         {CATEGORIES.map((category) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://ecommerce-website-final.onrender.com/api';
+const baseURL = 'http://localhost:5000/api'; // Testing local backend optimizations
 
 const api = axios.create({ baseURL });
 

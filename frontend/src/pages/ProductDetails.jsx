@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/api";
 import { useCart } from "../context/CartContext";
+import Skeleton from "../components/Skeleton";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -27,10 +28,30 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+
+
+  // ... existing code ...
+
   if (!product) {
     return (
-      <div className="p-6 text-center text-gray-600">
-        Loading product...
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          {/* Image Skeleton */}
+          <Skeleton className="w-full h-[460px] rounded-2xl" />
+
+          {/* Details Skeleton */}
+          <div className="space-y-6">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-12 w-3/4" />
+            <Skeleton className="h-8 w-1/4" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+            </div>
+            <Skeleton className="h-14 w-40 rounded-full" />
+          </div>
+        </div>
       </div>
     );
   }
@@ -70,11 +91,10 @@ const ProductDetails = () => {
           <div className="mb-6">
             <span className="font-medium">Availability:</span>{" "}
             <span
-              className={`ml-2 font-semibold ${
-                product.countInStock > 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
+              className={`ml-2 font-semibold ${product.countInStock > 0
+                ? "text-green-600"
+                : "text-red-600"
+                }`}
             >
               {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
             </span>
@@ -102,11 +122,10 @@ const ProductDetails = () => {
           <button
             onClick={() => addToCart({ ...product, qty })}
             disabled={product.countInStock === 0}
-            className={`w-full md:w-auto px-10 py-4 rounded-full text-white text-lg font-medium transition transform ${
-              product.countInStock === 0
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-black hover:scale-105 hover:bg-gray-900"
-            }`}
+            className={`w-full md:w-auto px-10 py-4 rounded-full text-white text-lg font-medium transition transform ${product.countInStock === 0
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-black hover:scale-105 hover:bg-gray-900"
+              }`}
           >
             Add to Cart
           </button>

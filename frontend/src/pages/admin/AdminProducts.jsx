@@ -10,14 +10,23 @@ const AdminProducts = () => {
   const [image, setImage] = useState(null);
   const [editingId, setEditingId] = useState(null);
 
+  // Pagination State
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   // FETCH PRODUCTS
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await api.get("/products");
-      setProducts(data);
+      try {
+        const { data } = await api.get(`/products?page=${page}`);
+        setProducts(data.products || []);
+        setTotalPages(data.pages || 1);
+      } catch (error) {
+        console.error("Error fetching admin products", error);
+      }
     };
     fetchProducts();
-  }, []);
+  }, [page]);
 
   // ADD or UPDATE PRODUCT
   const saveProduct = async () => {
@@ -129,9 +138,8 @@ const AdminProducts = () => {
         />
 
         <button
-          className={`${
-            editingId ? "bg-yellow-500" : "bg-green-600"
-          } text-white px-6 py-2 rounded`}
+          className={`${editingId ? "bg-yellow-500" : "bg-green-600"
+            } text-white px-6 py-2 rounded`}
           onClick={saveProduct}
         >
           {editingId ? "Update Product" : "Add Product"}
@@ -177,6 +185,25 @@ const AdminProducts = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Basic Pagination Controls */}
+      <div className="flex justify-center mt-8 gap-4">
+        <button
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          disabled={page === 1}
+          onClick={() => setPage(p => p - 1)}
+        >
+          Previous
+        </button>
+        <span className="py-2">Page {page} of {totalPages}</span>
+        <button
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          disabled={page === totalPages}
+          onClick={() => setPage(p => p + 1)}
+        >
+          Next
+        </button>
       </div>
     </AdminLayout>
   );

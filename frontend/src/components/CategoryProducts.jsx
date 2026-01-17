@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import ProductCardSkeleton from "./ProductCardSkeleton";
 
 const CategoryProducts = () => {
   const { category } = useParams();
@@ -11,10 +12,12 @@ const CategoryProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const { data } = await api.get(
           `/products?category=${category}`
         );
-        setProducts(data);
+        // Correctly handling paginated response structure: { products: [...], ... }
+        setProducts(data.products || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -25,19 +28,16 @@ const CategoryProducts = () => {
     fetchProducts();
   }, [category]);
 
-  if (loading) {
-    return <div className="p-6">Loading products...</div>;
-  }
-
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">{category}</h1>
 
-      {products.length === 0 ? (
-        <p className="text-gray-600">No products found.</p>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {products.map((p) => (
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {loading
+          ? Array.from({ length: 8 }).map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))
+          : products.length > 0 ? products.map((p) => (
             <Link
               key={p._id}
               to={`/product/${p._id}`}
@@ -57,9 +57,10 @@ const CategoryProducts = () => {
               <p className="text-gray-600 mt-1">{p.category}</p>
               <p className="font-bold text-lg mt-2">₹{p.price}</p>
             </Link>
-          ))}
-        </div>
-      )}
+          )) : (
+            <p className="text-gray-600 col-span-full">No products found.</p>
+          )}
+      </div>
     </div>
   );
 };
