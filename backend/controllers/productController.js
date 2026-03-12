@@ -112,7 +112,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// UPDATE PRODUCT
+//ex UPDATE PRODUCT
 exports.updateProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);

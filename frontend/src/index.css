@@ -6,10 +6,193 @@
   font-family: "Inter", sans-serif;
 }
 
+:root {
+  --primary: #5b21b6;
+  --accent: #ec4899;
+  --glass: rgba(255, 255, 255, 0.20);
+  --glass-border: rgba(255, 255, 255, 0.35);
+}
+
+body {
+  background: radial-gradient(circle at top, #f8fafc, #f1f5f9 40%, #e2e8f0 100%);
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes ambientGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 7px rgba(99, 102, 241, 0.4));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5));
+  }
+}
+
+@keyframes floatAround {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(8px, -10px, 0) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes rotateLoop {
+  0% {
+    transform: perspective(1200px) rotateY(0deg);
+  }
+
+  100% {
+    transform: perspective(1200px) rotateY(360deg);
+  }
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.02);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.product-3d-wrap {
+  perspective: 1400px;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.product-3d-card {
+  width: 320px;
+  height: 320px;
+  transform-style: preserve-3d;
+  animation: rotateLoop 22s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.product-3d-face {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.35);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.product-3d-card:hover .product-3d-face {
+  transform: translateZ(30px);
+}
+
+.product-3d-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-3d-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.c-3d-item {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.32);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  backdrop-filter: blur(10px);
+}
+
+.c-3d-item:hover {
+  transform: translateY(-8px) rotateX(4deg) scale(1.03);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.42);
+}
+
+.c-3d-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-3d-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  border-radius: 1rem;
+}
+
+.card-3d:hover .card-3d-inner {
+  transform: rotateX(8deg) rotateY(-8deg) scale(1.035);
+  box-shadow: 0 32px 48px rgba(30, 41, 59, 0.27);
+}
+
+.card-3d-image {
+  transform: translateZ(25px);
+  transition: transform 0.35s ease;
+}
+
+.card-3d:hover .card-3d-image {
+  transform: translateZ(35px) scale(1.03);
+}
+
+.hero-float {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(236, 72, 153, 0.35));
+  filter: blur(16px);
+  animation: floatAround 7s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero-float.alt {
+  top: 65%;
+  left: 72%;
+  width: 180px;
+  height: 180px;
+  animation-duration: 8.5s;
+}
+
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
 }

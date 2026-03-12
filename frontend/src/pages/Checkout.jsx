@@ -49,7 +49,7 @@ const Checkout = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
       {/* LEFT - SHIPPING */}
-      <div className="md:col-span-2 bg-white p-6 rounded shadow">
+      <div className="md:col-span-2 glass-card p-6 rounded-2xl shadow-xl border border-white/30 backdrop-blur-lg">
         <h2 className="text-2xl font-bold mb-6">Shipping Address</h2>
 
         <div className="space-y-4">
@@ -88,7 +88,7 @@ const Checkout = () => {
       </div>
 
       {/* RIGHT - ORDER SUMMARY */}
-      <div className="bg-white p-6 rounded shadow h-fit">
+      <div className="glass-card p-6 rounded-2xl shadow-xl border border-white/30 backdrop-blur-lg h-fit">
         <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
 
         <div className="space-y-3 mb-4">
@@ -119,7 +119,7 @@ const Checkout = () => {
 
         <button
           onClick={placeOrderHandler}
-          className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition"
+          className="w-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-indigo-600 hover:to-pink-600 transition transform hover:scale-105"
         >
           Place Order
         </button>

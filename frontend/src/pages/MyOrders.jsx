@@ -27,7 +27,9 @@ const MyOrders = () => {
               to={`/order/${order._id}`}
               className="block"
             >
-              <div className="border rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer bg-white">
+              <div className="card-3d">
+                <div className="card-3d-inner glass-card border border-white/30 rounded-2xl p-4 shadow-lg transition hover:shadow-2xl">
+
                 <div className="flex justify-between mb-2">
                   <span className="font-semibold">
                     Order ID: {order._id}
@@ -67,6 +69,7 @@ const MyOrders = () => {
                   </span>
                 </p>
               </div>
+            </div>
             </Link>
           ))}
         </div>

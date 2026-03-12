@@ -21,13 +21,14 @@ import OrderDetails from "./pages/OrderDetails";
 import VerifyOtp from "./pages/VerifyOtp";
 import SearchResults from "./pages/SearchResults";
 import Footer from "./components/Footer";
-
-
+import BackgroundAura from "./components/BackgroundAura";
 
 function App() {
   return (
-     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-    <BrowserRouter>
+     <div className="min-h-screen overflow-hidden relative">
+      <BackgroundAura />
+      <div className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <BrowserRouter>
    
       <Navbar className="sticky top-0 z-50 backdrop-blur-lg bg-white/70 border-b" />
 
@@ -101,8 +102,9 @@ function App() {
         <Route path="*" element={<h1>404 Not Found</h1>} />
         <Route path="/verify-otp" element={<VerifyOtp />} />
       </Routes>
-    </BrowserRouter>
       <Footer />
+    </BrowserRouter>
+    </div>
     </div>
   );
 }

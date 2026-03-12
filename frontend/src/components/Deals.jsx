@@ -31,18 +31,17 @@ const Deals = () => {
   return (
     <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
       {deals.map((deal, i) => (
-        <div
-          key={i}
-          className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition"
-        >
-          <img
-            src={deal.image}
-            alt={deal.title}
-            className="h-48 w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-4 text-white">
-            <h3 className="font-semibold text-lg">{deal.title}</h3>
-            <p className="text-sm">{deal.offer}</p>
+        <div key={i} className="card-3d">
+          <div className="card-3d-inner glass-card overflow-hidden rounded-2xl relative">
+            <img
+              src={deal.image}
+              alt={deal.title}
+              className="h-48 w-full object-cover card-3d-image"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4 text-white">
+              <h3 className="font-semibold text-lg">{deal.title}</h3>
+              <p className="text-sm">{deal.offer}</p>
+            </div>
           </div>
         </div>
       ))}
