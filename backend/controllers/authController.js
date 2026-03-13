@@ -32,11 +32,16 @@ exports.registerUser = async (req, res) => {
         userExists.otpExpires = Date.now() + 10 * 60 * 1000;
         await userExists.save();
 
-        await sendEmail({
-          to: email,
-          subject: "Verify your email - MERN Shop",
-          html: OTP_HTML(otp),
-        });
+        // Try to send email but don't block registration on failure
+        try {
+          await sendEmail({
+            to: email,
+            subject: "Verify your email - MERN Shop",
+            html: OTP_HTML(otp),
+          });
+        } catch (emailErr) {
+          console.error("Email send failed (resend for existing user):", emailErr.message);
+        }
 
         return res.status(200).json({ message: "OTP resent to email" });
       }
@@ -55,11 +60,16 @@ exports.registerUser = async (req, res) => {
       isVerified: false,
     });
 
-    await sendEmail({
-      to: email,
-      subject: "Verify your email - MERN Shop",
-      html: OTP_HTML(otp),
-    });
+    // Try to send email but don't block registration on failure
+    try {
+      await sendEmail({
+        to: email,
+        subject: "Verify your email - MERN Shop",
+        html: OTP_HTML(otp),
+      });
+    } catch (emailErr) {
+      console.error("Email send failed (new registration):", emailErr.message);
+    }
 
     res.status(201).json({ message: "OTP sent to email" });
   } catch (error) {
