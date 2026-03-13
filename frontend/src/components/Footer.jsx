@@ -1,75 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-/* ── Mini VortexLogo (self-contained, no import needed) ── */
-const FooterLogo = ({ size = 36 }) => {
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 50);
-    return () => clearInterval(id);
-  }, []);
-  const angle = tick * 2.5;
-  return (
-    <svg width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ overflow: "visible", flexShrink: 0 }}>
-      <defs>
-        <radialGradient id="fcg"><stop offset="0%" stopColor="#fff" stopOpacity="0.95"/><stop offset="40%" stopColor="#fbbf24"/><stop offset="100%" stopColor="#ef4444" stopOpacity="0.8"/></radialGradient>
-        <linearGradient id="fr1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f59e0b"/><stop offset="50%" stopColor="#f59e0b" stopOpacity="0.1"/><stop offset="100%" stopColor="#ef4444"/></linearGradient>
-        <linearGradient id="fr2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#818cf8"/><stop offset="50%" stopColor="#818cf8" stopOpacity="0.05"/><stop offset="100%" stopColor="#06b6d4"/></linearGradient>
-        <filter id="fg"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="fog" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <circle cx="22" cy="22" r="20" fill="rgba(245,158,11,0.05)"/>
-      <g style={{ transform: `rotate(${angle}deg)`, transformOrigin: "22px 22px" }}>
-        <ellipse cx="22" cy="22" rx="18" ry="5.5" stroke="url(#fr1)" strokeWidth="1.4" fill="none" filter="url(#fg)"/>
-      </g>
-      <g style={{ transform: `rotate(${-angle * 0.65 + 60}deg)`, transformOrigin: "22px 22px" }}>
-        <ellipse cx="22" cy="22" rx="13" ry="4.5" stroke="url(#fr2)" strokeWidth="1.1" fill="none" filter="url(#fg)"/>
-      </g>
-      <circle cx="22" cy="22" r="6.5" fill="url(#fcg)" filter="url(#fog)"/>
-      <ellipse cx="20.2" cy="19.8" rx="2.5" ry="1.7" fill="white" opacity="0.5"/>
-      {[0, 120, 240].map((b, i) => {
-        const a = ((angle * (i === 1 ? -0.65 : 1)) + b + (i === 1 ? 60 : 0)) * Math.PI / 180;
-        const rx = i === 0 ? 18 : 13;
-        return <circle key={i} cx={22 + rx * Math.cos(a)} cy={22 + [5.5, 4.5][Math.min(i,1)] * 0.28 * Math.sin(a)} r="1.2" fill={["#f59e0b","#818cf8","#34d399"][i]} filter="url(#fg)" opacity="0.9"/>;
-      })}
-    </svg>
-  );
-};
-
-/* ── Animated grid lines canvas ── */
-const GridCanvas = () => {
-  const ref = useRef(null);
-  useEffect(() => {
-    const canvas = ref.current;
-    const ctx = canvas.getContext("2d");
-    let W = canvas.width = canvas.offsetWidth;
-    let H = canvas.height = canvas.offsetHeight;
-    let offset = 0;
-    let raf;
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      const step = 60;
-      ctx.strokeStyle = "rgba(245,158,11,0.04)";
-      ctx.lineWidth = 0.5;
-      // horizontal lines drifting up
-      for (let y = (offset % step) - step; y < H + step; y += step) {
-        ctx.globalAlpha = Math.max(0, 1 - (y / H) * 1.5);
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-      }
-      ctx.globalAlpha = 1;
-      // vertical lines
-      ctx.strokeStyle = "rgba(99,102,241,0.04)";
-      for (let x = 0; x < W + step; x += step) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-      }
-      offset = (offset + 0.3) % step;
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  return <canvas ref={ref} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}/>;
-};
+/* ── Static Logo ── */
+const FooterLogo = ({ size = 36 }) => (
+  <div style={{
+    width: size, height: size, borderRadius: 10, flexShrink: 0,
+    background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: size * 0.45, fontWeight: 900, color: "#fff",
+    boxShadow: "0 4px 12px rgba(245,158,11,0.3)",
+  }}>V</div>
+);
 
 /* ── Newsletter form ── */
 const NewsletterForm = () => {
@@ -170,17 +111,6 @@ const FootLink = ({ children, to = "/" }) => {
 
 /* ── Main Footer ── */
 const Footer = () => {
-  const [cardTilt, setCardTilt] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
-
-  const onCardMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -6;
-    setCardTilt({ x, y });
-  };
-
   const letters = "VORTEX".split("");
 
   return (
@@ -241,9 +171,6 @@ const Footer = () => {
 
       <footer style={{ background: "#070710", position: "relative", overflow: "hidden", marginTop: 80 }}>
 
-        {/* Animated grid background */}
-        <GridCanvas />
-
         {/* Ambient glows */}
         <div style={{ position: "absolute", width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 65%)", top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", width: 500, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 65%)", bottom: 0, right: -80, filter: "blur(60px)", pointerEvents: "none" }} />
@@ -279,25 +206,18 @@ const Footer = () => {
                 A premium shopping experience with curated electronics, fashion, home essentials and more. Fast delivery · Easy returns · Secure payments.
               </p>
 
-              {/* 3D tilt card — trust badges */}
+              {/* Trust badges */}
               <div
-                ref={cardRef}
-                onMouseMove={onCardMouseMove}
-                onMouseLeave={() => setCardTilt({ x: 0, y: 0 })}
                 style={{
                   padding: "16px 20px", borderRadius: 16,
                   background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.08)",
-                  backdropFilter: "blur(16px)",
-                  transform: `perspective(600px) rotateY(${cardTilt.x}deg) rotateX(${cardTilt.y}deg)`,
-                  transition: cardTilt.x === 0 ? "transform 0.5s ease" : "none",
-                  transformStyle: "preserve-3d",
                   maxWidth: 300,
                 }}
               >
                 {[["🚀", "Free shipping", "On orders above ₹499"],["🔒", "Secure payments", "256-bit SSL encrypted"],["↩️", "Easy returns", "30-day no questions asked"]].map(([icon, title, sub]) => (
                   <div key={title} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                    <span style={{ fontSize: 18, transform: "translateZ(8px)", display: "inline-block" }}>{icon}</span>
+                    <span style={{ fontSize: 18, display: "inline-block" }}>{icon}</span>
                     <div>
                       <div style={{ color: "#fff", fontWeight: 600, fontSize: 13, fontFamily: "'DM Sans',sans-serif" }}>{title}</div>
                       <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, fontFamily: "'DM Sans',sans-serif" }}>{sub}</div>

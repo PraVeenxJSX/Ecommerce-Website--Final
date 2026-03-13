@@ -19,92 +19,43 @@ import CategoryProducts from "./components/CategoryProducts";
 import ProductDetails from "./pages/ProductDetails";
 import OrderDetails from "./pages/OrderDetails";
 import VerifyOtp from "./pages/VerifyOtp";
+import ForgotPassword from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
 import Footer from "./components/Footer";
-import BackgroundAura from "./components/BackgroundAura";
 
 function App() {
   return (
-     <div className="min-h-screen overflow-hidden relative">
-      <BackgroundAura />
-      <div className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen overflow-hidden relative" style={{ background: "#0a0a0f" }}>
       <BrowserRouter>
-   
-      <Navbar className="sticky top-0 z-50 backdrop-blur-lg bg-white/70 border-b" />
+        <Navbar />
 
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/category/:category" element={<CategoryProducts />} />
-<Route path="/product/:id" element={<ProductDetails />} />
-<Route path="/order/:id" element={<OrderDetails />} />
-  <Route path="/search" element={<SearchResults />} />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/category/:category" element={<CategoryProducts />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/order/:id" element={<OrderDetails />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
 
+          {/* User Protected Routes */}
+          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+          <Route path="/myorders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
 
-        {/* User Protected Routes */}
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+          <Route path="/admin/orders" element={<AdminRoute><AdminOrders /></AdminRoute>} />
+          <Route path="/admin/products" element={<AdminRoute><AdminProducts /></AdminRoute>} />
 
-        <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          }
-        />
+          <Route path="*" element={<h1 style={{ color: "#fff", textAlign: "center", padding: 60 }}>404 Not Found</h1>} />
+        </Routes>
 
-        <Route
-          path="/myorders"
-          element={
-            <ProtectedRoute>
-              <MyOrders />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Admin Routes */}
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/admin/orders"
-          element={
-            <AdminRoute>
-              <AdminOrders />
-            </AdminRoute>
-          }
-        />
-        
-
-        <Route
-          path="/admin/products"
-          element={
-            <AdminRoute>
-              <AdminProducts />
-            </AdminRoute>
-          }
-        />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
-        <Route path="/verify-otp" element={<VerifyOtp />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-    </div>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }

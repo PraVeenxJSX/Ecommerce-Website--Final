@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
+import { warmUpBackend } from "../services/api";
 
 /* ── Category meta ── */
 const CAT_META = {
@@ -200,6 +201,7 @@ const CategoryProducts = () => {
       try {
         setLoading(true);
         setProducts([]);
+        await warmUpBackend();
         const { data } = await api.get(`/products?category=${category}`);
         setProducts(data.products || data || []);
       } catch (err) { console.error(err); }

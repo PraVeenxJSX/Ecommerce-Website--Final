@@ -24,75 +24,18 @@ const CAT_META = {
 const catMeta = (cat) => CAT_META[cat] || { icon: "🏷️", color: "#f59e0b" };
 
 /* ═══════════════════════════════════════════════════════
-   VORTEX ANIMATED LOGO
+   STATIC LOGO
 ═══════════════════════════════════════════════════════ */
-const VortexLogo = ({ size = 44 }) => {
-  const [hov, setHov] = useState(false);
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 50);
-    return () => clearInterval(id);
-  }, []);
-  const ang = tick * 3;
-
-  return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ width: size, height: size, flexShrink: 0, cursor: "pointer",
-        transform: hov ? "scale(1.12)" : "scale(1)",
-        transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}>
-      <svg width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ overflow: "visible" }}>
-        <defs>
-          <radialGradient id="lg-cg" cx="50%" cy="35%" r="60%">
-            <stop offset="0%"   stopColor="#fff"    stopOpacity="0.95" />
-            <stop offset="40%"  stopColor="#fbbf24" stopOpacity="0.9"  />
-            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.8"  />
-          </radialGradient>
-          <linearGradient id="lg-r1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stopColor="#f59e0b" stopOpacity="0.9"  />
-            <stop offset="50%"  stopColor="#f59e0b" stopOpacity="0.08" />
-            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.9"  />
-          </linearGradient>
-          <linearGradient id="lg-r2" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stopColor="#818cf8" stopOpacity="0.85" />
-            <stop offset="50%"  stopColor="#818cf8" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.85" />
-          </linearGradient>
-          <linearGradient id="lg-r3" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%"   stopColor="#34d399" stopOpacity="0.7"  />
-            <stop offset="50%"  stopColor="#34d399" stopOpacity="0.04" />
-            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.7"  />
-          </linearGradient>
-          <filter id="lg-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation={hov ? "3" : "2"} result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-          <filter id="lg-og" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-        <circle cx="22" cy="22" r="20" fill="rgba(245,158,11,0.05)" />
-        <g style={{ transform: `rotate(${ang}deg)`, transformOrigin: "22px 22px" }}>
-          <ellipse cx="22" cy="22" rx="19" ry="6" stroke="url(#lg-r1)" strokeWidth="1.5" fill="none" filter="url(#lg-glow)" />
-        </g>
-        <g style={{ transform: `rotate(${-ang * 0.7 + 60}deg)`, transformOrigin: "22px 22px" }}>
-          <ellipse cx="22" cy="22" rx="14" ry="5" stroke="url(#lg-r2)" strokeWidth="1.2" fill="none" filter="url(#lg-glow)" />
-        </g>
-        <g style={{ transform: `rotate(${ang * 0.4 + 120}deg)`, transformOrigin: "22px 22px" }}>
-          <ellipse cx="22" cy="22" rx="10" ry="4" stroke="url(#lg-r3)" strokeWidth="1" fill="none" filter="url(#lg-glow)" />
-        </g>
-        <circle cx="22" cy="22" r="7" fill="url(#lg-cg)" filter="url(#lg-og)" />
-        <ellipse cx="20" cy="19.5" rx="3" ry="2" fill="white" opacity="0.55" />
-        {[0, 120, 240].map((base, i) => {
-          const a = ((ang * (i === 1 ? -0.7 : i === 2 ? 0.4 : 1)) + base + (i === 1 ? 60 : i === 2 ? 120 : 0)) * Math.PI / 180;
-          const rx = [19, 14, 10][i];
-          return <circle key={i} cx={22 + rx * Math.cos(a)} cy={22 + [6, 5, 4][i] * 0.3 * Math.sin(a)}
-            r={hov ? "1.6" : "1.1"} fill={["#f59e0b", "#818cf8", "#34d399"][i]} opacity="0.9" filter="url(#lg-glow)" />;
-        })}
-      </svg>
-    </div>
-  );
-};
+const Logo = ({ size = 44 }) => (
+  <div style={{
+    width: size, height: size, borderRadius: 14, flexShrink: 0,
+    background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: size * 0.45, fontWeight: 900, color: "#fff",
+    boxShadow: "0 4px 16px rgba(245,158,11,0.35)",
+    cursor: "pointer",
+  }}>V</div>
+);
 
 /* ═══════════════════════════════════════════════════════
    WORDMARK
@@ -395,7 +338,7 @@ const MobileDrawer = ({ open, onClose, user, logout, cartCount }) => {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "18px 18px 14px", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <VortexLogo size={36} />
+            <Logo size={36} />
             <div>
               <VortexWordmark size={20} />
               <div style={{ fontSize: 8, letterSpacing: 3, color: "rgba(245,158,11,0.5)", fontFamily: "'DM Sans'", textTransform: "uppercase", marginTop: -1 }}>Commerce</div>
@@ -784,7 +727,7 @@ const Navbar = () => {
 
           {/* ── Logo ── */}
           <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", flexShrink: 0 }}>
-            <VortexLogo size={44} />
+            <Logo size={44} />
             <div className="vx-hide-sm">
               <VortexWordmark size={25} />
               <span style={{ fontSize: 9.5, letterSpacing: 3.5, color: "rgba(245,158,11,0.55)",

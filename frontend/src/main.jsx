@@ -4,6 +4,8 @@ import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import "./index.css";
+// Warm up backend as early as possible (fires on import)
+import "./services/api";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

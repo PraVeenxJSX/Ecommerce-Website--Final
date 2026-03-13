@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import api from "../services/api";
+import { warmUpBackend } from "../services/api";
 import { Link } from "react-router-dom";
 import CategoryBar from "../components/CategoryBar";
 import { CATEGORIES } from "../constants/categories";
@@ -54,11 +55,16 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        // Ensure backend is awake before fetching products
+        await warmUpBackend();
         const promises = CATEGORIES.map(cat =>
           api.get(`/products?category=${encodeURIComponent(cat)}&limit=6`)
         );
-        const responses = await Promise.all(promises);
-        const all = responses.flatMap(res => res.data?.products || res.data || []);
+        // Use allSettled so partial results still show even if some categories fail
+        const results = await Promise.allSettled(promises);
+        const all = results
+          .filter(r => r.status === "fulfilled")
+          .flatMap(r => r.value.data?.products || r.value.data || []);
         setProducts(all);
       } catch (err) {
         console.error("Error fetching homepage products:", err);
@@ -77,6 +83,29 @@ const Home = () => {
       <Deals />
 
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 24px", display: "flex", flexDirection: "column", gap: 64 }}>
+
+        {/* Loading skeletons */}
+        {loading && (
+          <section>
+            <div style={{ height: 18, width: 180, borderRadius: 8, background: "rgba(255,255,255,0.07)", marginBottom: 28 }} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }} className="featured-grid">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} style={{
+                  borderRadius: 22, overflow: "hidden", background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.06)", animation: `homePulse 1.5s ease-in-out ${i * 0.1}s infinite`,
+                }}>
+                  <div style={{ height: 220, background: "rgba(255,255,255,0.05)" }} />
+                  <div style={{ padding: 18 }}>
+                    <div style={{ height: 10, borderRadius: 6, background: "rgba(255,255,255,0.05)", width: "40%", marginBottom: 8 }} />
+                    <div style={{ height: 14, borderRadius: 6, background: "rgba(255,255,255,0.07)", width: "75%", marginBottom: 12 }} />
+                    <div style={{ height: 18, borderRadius: 6, background: "rgba(255,255,255,0.07)", width: "35%" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <style>{`@keyframes homePulse { 0%,100%{opacity:0.4} 50%{opacity:0.7} }`}</style>
+          </section>
+        )}
 
         {/* Featured Showcase */}
         {products.length > 0 && (

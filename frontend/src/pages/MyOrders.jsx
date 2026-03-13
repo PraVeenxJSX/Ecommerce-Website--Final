@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
 
+const glassCard = {
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 20,
+  backdropFilter: "blur(24px)",
+  padding: 24,
+  transition: "all 0.3s ease",
+};
+
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
 
@@ -14,62 +23,77 @@ const MyOrders = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+    <div style={{ minHeight: "100vh", padding: "48px 24px", maxWidth: 960, margin: "0 auto" }}>
+      <h1 style={{
+        fontSize: 32, fontWeight: 800, color: "#fff", marginBottom: 32,
+        letterSpacing: -0.8, fontFamily: "'Playfair Display', Georgia, serif"
+      }}>My Orders</h1>
 
       {orders.length === 0 ? (
-        <p className="text-gray-600">No orders found</p>
+        <div style={glassCard}>
+          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, textAlign: "center", margin: "24px 0" }}>
+            No orders found
+          </p>
+        </div>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {orders.map((order) => (
             <Link
               key={order._id}
               to={`/order/${order._id}`}
-              className="block"
+              style={{ textDecoration: "none", color: "inherit", display: "block" }}
             >
-              <div className="card-3d">
-                <div className="card-3d-inner glass-card border border-white/30 rounded-2xl p-4 shadow-lg transition hover:shadow-2xl">
-
-                <div className="flex justify-between mb-2">
-                  <span className="font-semibold">
+              <div
+                style={glassCard}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.4)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
+                  <span style={{ fontWeight: 700, color: "#fff", fontSize: 15 }}>
                     Order ID: {order._id}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
                     {new Date(order.createdAt).toLocaleDateString()}
                   </span>
                 </div>
 
-                <p className="mb-1">
-                  <strong>Total:</strong> ₹{order.totalPrice}
+                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginBottom: 8 }}>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>Total:</span>{" "}
+                  <span style={{ color: "#f59e0b", fontWeight: 700 }}>₹{order.totalPrice}</span>
                 </p>
 
-                <p className="mb-1">
-                  <strong>Payment:</strong>{" "}
-                  <span
-                    className={
-                      order.isPaid
-                        ? "text-green-600"
-                        : "text-yellow-600"
-                    }
-                  >
-                    {order.isPaid ? "Paid" : "Pending"}
-                  </span>
-                </p>
+                <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                  <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
+                    <span style={{ color: "rgba(255,255,255,0.4)" }}>Payment:</span>{" "}
+                    <span style={{
+                      color: order.isPaid ? "#34d399" : "#f59e0b",
+                      fontWeight: 600,
+                    }}>
+                      {order.isPaid ? "Paid" : "Pending"}
+                    </span>
+                  </p>
 
-                <p>
-                  <strong>Delivery:</strong>{" "}
-                  <span
-                    className={
-                      order.isDelivered
-                        ? "text-green-600"
-                        : "text-yellow-600"
-                    }
-                  >
-                    {order.isDelivered ? "Delivered" : "Pending"}
-                  </span>
-                </p>
+                  <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
+                    <span style={{ color: "rgba(255,255,255,0.4)" }}>Delivery:</span>{" "}
+                    <span style={{
+                      color: order.isDelivered ? "#34d399" : "#f59e0b",
+                      fontWeight: 600,
+                    }}>
+                      {order.isDelivered ? "Delivered" : "Pending"}
+                    </span>
+                  </p>
+                </div>
               </div>
-            </div>
             </Link>
           ))}
         </div>

@@ -24,6 +24,9 @@ app.use(
   })
 );
 
+// Lightweight health endpoint for warm-up pings
+app.get("/api/health", (req, res) => res.json({ status: "ok" }));
+
 app.use("/api/users", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));

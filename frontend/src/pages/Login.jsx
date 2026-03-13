@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,6 +18,7 @@ const Login = () => {
       setLoading(true);
       const { data } = await api.post("/users/login", { email, password });
       login(data);
+      navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     } finally {
@@ -131,6 +134,12 @@ const Login = () => {
             {loading ? "Signing in…" : "Sign in →"}
           </motion.button>
         </form>
+
+        <div style={{ textAlign: "right", marginTop: 12 }}>
+          <a href="/forgot-password" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none", fontSize: 13, fontWeight: 500 }}>
+            Forgot password?
+          </a>
+        </div>
 
         <p style={{ textAlign: "center", color: "rgba(255,255,255,0.35)", fontSize: 14, marginTop: 28 }}>
           No account?{" "}

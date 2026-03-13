@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
+import { warmUpBackend } from "../services/api";
 import { useCart } from "../context/CartContext";
 import Skeleton from "../components/Skeleton";
 
@@ -16,6 +17,7 @@ const ProductDetails = () => {
   useEffect(() => {
     setProduct(null);
     const fetchProduct = async () => {
+      await warmUpBackend();
       const { data } = await api.get(`/products/${id}`);
       setProduct(data);
       const relatedRes = await api.get(`/products?category=${data.category}`);
