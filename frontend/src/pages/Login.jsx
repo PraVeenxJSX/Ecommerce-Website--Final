@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { GoogleLogin } from "@react-oauth/google";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
@@ -21,6 +22,21 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setLoading(true);
+      const { data } = await api.post("/users/google", {
+        credential: credentialResponse.credential,
+      });
+      login(data);
+      navigate("/");
+    } catch (error) {
+      alert(error.response?.data?.message || "Google login failed");
     } finally {
       setLoading(false);
     }
@@ -134,6 +150,31 @@ const Login = () => {
             {loading ? "Signing in…" : "Sign in →"}
           </motion.button>
         </form>
+
+        {/* Divider */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: 16,
+          margin: "24px 0 20px",
+        }}>
+          <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.1)" }} />
+          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12, fontWeight: 500, letterSpacing: 0.5, textTransform: "uppercase" }}>
+            or continue with
+          </span>
+          <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.1)" }} />
+        </div>
+
+        {/* Google Sign-In */}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => alert("Google sign-in was unsuccessful. Please try again.")}
+            theme="filled_black"
+            size="large"
+            shape="rectangular"
+            text="signin_with"
+            width="340"
+          />
+        </div>
 
         <div style={{ textAlign: "right", marginTop: 12 }}>
           <a href="/forgot-password" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none", fontSize: 13, fontWeight: 500 }}>

@@ -8,6 +8,7 @@ const {
   forgotPassword,
   resetPassword,
   login,
+  googleLogin,
 } = require("../controllers/authController");
 
 // Register (send OTP)
@@ -27,5 +28,8 @@ router.post("/reset-password", resetPassword);
 
 // Login (blocked until verified)
 router.post("/login", login);
+
+// Google OAuth login
+router.post("/google", googleLogin);
 
 module.exports = router;
