@@ -38,6 +38,11 @@ export const CartProvider = ({ children }) => {
     setCartItems(cartItems.filter((x) => x._id !== id));
   };
 
+  // CLEAR CART (after successful payment)
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -45,6 +50,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         updateCartQty,
         removeFromCart,
+        clearCart,
       }}
     >
       {children}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { CATEGORIES } from "../constants/categories";
 
 /* ═══════════════════════════════════════════════════════
@@ -550,6 +551,7 @@ const AccountDropdown = ({ user, logout, onClose }) => (
 const Navbar = () => {
   const { user, logout }  = useAuth();
   const { cartItems }     = useCart();
+  const { wishlistItems } = useWishlist();
   const navigate          = useNavigate();
   const location          = useLocation();
 
@@ -798,12 +800,19 @@ const Navbar = () => {
             </button>
 
             {/* Wishlist icon (desktop) */}
-            <button className="vx-icon-btn vx-hide-md" title="Wishlist" aria-label="Wishlist">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <Link to="/wishlist" className="vx-icon-btn vx-hide-md" title="Wishlist" aria-label="Wishlist" style={{ position: "relative" }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill={wishlistItems.length > 0 ? "#ef4444" : "none"}>
                 <path d="M12 21C12 21 3 14 3 8.5a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-9 12.5-9 12.5z"
-                  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  stroke={wishlistItems.length > 0 ? "#ef4444" : "currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </button>
+              {wishlistItems.length > 0 && (
+                <span style={{ position: "absolute", top: -4, right: -4, minWidth: 16, height: 16, borderRadius: 100, padding: "0 4px",
+                  background: "#ef4444", color: "#fff", fontSize: 10, fontWeight: 800,
+                  display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+                  {wishlistItems.length}
+                </span>
+              )}
+            </Link>
 
             {/* Cart */}
             <Link to="/cart" className="vx-cart">

@@ -239,6 +239,7 @@ const AdminProducts = () => {
           </label>
           <input
             type="file"
+            accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/bmp,image/svg+xml,image/avif"
             className="w-full border border-gray-200 p-2.5 rounded-lg text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 transition"
             onChange={(e) => setImage(e.target.files[0])}
           />

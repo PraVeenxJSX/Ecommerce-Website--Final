@@ -137,7 +137,10 @@ const AdminOrders = () => {
                     Total
                   </th>
                   <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Status
+                    Payment
+                  </th>
+                  <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Delivery
                   </th>
                   <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Action
@@ -171,10 +174,31 @@ const AdminOrders = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      {order.isDelivered ? (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                          Delivered
+                      {order.isPaid ? (
+                        <div>
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                            Paid
+                          </span>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {formatDate(order.paidAt)}
+                          </p>
+                        </div>
+                      ) : (
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-600">
+                          Unpaid
                         </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4">
+                      {order.isDelivered ? (
+                        <div>
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                            Delivered
+                          </span>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {formatDate(order.deliveredAt)}
+                          </p>
+                        </div>
                       ) : (
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
                           Pending

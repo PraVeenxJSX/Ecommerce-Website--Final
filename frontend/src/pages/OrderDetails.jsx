@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
+import { useCart } from "../context/CartContext";
 
 const glassCard = {
   background: "rgba(255,255,255,0.04)",
@@ -12,7 +13,10 @@ const glassCard = {
 
 const OrderDetails = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const [order, setOrder] = useState(null);
+  const [paymentMessage, setPaymentMessage] = useState("");
+  const { clearCart } = useCart();
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -21,6 +25,23 @@ const OrderDetails = () => {
     };
     fetchOrder();
   }, [id]);
+
+  // Verify payment if redirected from Stripe
+  useEffect(() => {
+    const verifyPayment = async () => {
+      if (searchParams.get("payment_success") === "true") {
+        try {
+          const { data } = await api.put(`/orders/${id}/pay`);
+          setOrder(data);
+          setPaymentMessage("Payment successful!");
+          clearCart();
+        } catch {
+          setPaymentMessage("Payment verification failed. Please contact support.");
+        }
+      }
+    };
+    verifyPayment();
+  }, [id, searchParams]);
 
   if (!order) {
     return (
@@ -36,6 +57,30 @@ const OrderDetails = () => {
         fontSize: 32, fontWeight: 800, color: "#fff", marginBottom: 32,
         letterSpacing: -0.8, fontFamily: "'Playfair Display', Georgia, serif"
       }}>Order Details</h1>
+
+      {/* Payment Status Message */}
+      {paymentMessage && (
+        <div style={{
+          ...glassCard,
+          marginBottom: 24,
+          background: paymentMessage.includes("successful")
+            ? "rgba(52,211,153,0.1)"
+            : "rgba(239,68,68,0.1)",
+          border: paymentMessage.includes("successful")
+            ? "1px solid rgba(52,211,153,0.3)"
+            : "1px solid rgba(239,68,68,0.3)",
+          textAlign: "center",
+        }}>
+          <p style={{
+            color: paymentMessage.includes("successful") ? "#34d399" : "#ef4444",
+            fontWeight: 700,
+            fontSize: 16,
+            margin: 0,
+          }}>
+            {paymentMessage}
+          </p>
+        </div>
+      )}
 
       {/* ORDER INFO */}
       <div style={{ ...glassCard, marginBottom: 24 }}>
@@ -56,6 +101,11 @@ const OrderDetails = () => {
             }}>
               {order.isPaid ? "Paid" : "Pending"}
             </span>
+            {order.isPaid && order.paidAt && (
+              <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12, marginLeft: 8 }}>
+                on {new Date(order.paidAt).toLocaleString()}
+              </span>
+            )}
           </p>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
             <span style={{ color: "rgba(255,255,255,0.4)" }}>Delivery:</span>{" "}

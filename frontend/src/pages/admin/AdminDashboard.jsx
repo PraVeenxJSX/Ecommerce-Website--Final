@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({ total: 0, paid: 0, unpaid: 0, revenue: 0 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const { data } = await api.get("/orders");
+        const total = data.length;
+        const paid = data.filter((o) => o.isPaid).length;
+        const unpaid = total - paid;
+        const revenue = data
+          .filter((o) => o.isPaid)
+          .reduce((sum, o) => sum + o.totalPrice, 0);
+        setStats({ total, paid, unpaid, revenue });
+      } catch {
+        // stats stay at 0
+      }
+    };
+    fetchStats();
+  }, []);
 
   const cards = [
     {
@@ -43,6 +63,26 @@ const AdminDashboard = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
         <p className="text-gray-500 mt-1">Welcome back, Admin. Here is a quick look at your store.</p>
+      </div>
+
+      {/* Payment Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="bg-white rounded-xl shadow-sm p-5">
+          <p className="text-sm text-gray-500">Total Orders</p>
+          <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-5">
+          <p className="text-sm text-gray-500">Paid</p>
+          <p className="text-2xl font-bold text-green-600">{stats.paid}</p>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-5">
+          <p className="text-sm text-gray-500">Unpaid</p>
+          <p className="text-2xl font-bold text-red-500">{stats.unpaid}</p>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-5">
+          <p className="text-sm text-gray-500">Revenue</p>
+          <p className="text-2xl font-bold text-amber-600">₹{stats.revenue.toLocaleString("en-IN")}</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -81,6 +81,11 @@ const MyOrders = () => {
                     }}>
                       {order.isPaid ? "Paid" : "Pending"}
                     </span>
+                    {order.isPaid && order.paidAt && (
+                      <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12, marginLeft: 8 }}>
+                        ({new Date(order.paidAt).toLocaleDateString()})
+                      </span>
+                    )}
                   </p>
 
                   <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>

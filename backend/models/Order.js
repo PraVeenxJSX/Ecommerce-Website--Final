@@ -33,11 +33,19 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
+    paymentMethod: {
+      type: String,
+      default: "Stripe",
+    },
+
+    stripeSessionId: {
+      type: String,
+    },
+
     isPaid: {
       type: Boolean,
       default: false,
     },
-    
 
     paidAt: Date,
     isDelivered: {

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
 import { warmUpBackend } from "../services/api";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import Skeleton from "../components/Skeleton";
 
 const ProductDetails = () => {
@@ -13,6 +14,7 @@ const ProductDetails = () => {
   const [related, setRelated] = useState([]);
   const [added, setAdded] = useState(false);
   const { addToCart } = useCart();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   useEffect(() => {
     setProduct(null);
@@ -139,25 +141,47 @@ const ProductDetails = () => {
             )}
 
             {/* CTA */}
-            <AnimatePresence mode="wait">
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <AnimatePresence mode="wait">
+                <motion.button
+                  key={added ? "added" : "cart"}
+                  initial={{ scale: 0.97 }} animate={{ scale: 1 }} exit={{ scale: 0.97 }}
+                  whileHover={inStock ? { scale: 1.02 } : {}} whileTap={inStock ? { scale: 0.97 } : {}}
+                  onClick={handleAddToCart}
+                  disabled={!inStock}
+                  style={{
+                    padding: "16px 36px", borderRadius: 14, border: "none",
+                    background: !inStock ? "rgba(255,255,255,0.1)" : added ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #f59e0b, #ef4444)",
+                    color: !inStock ? "rgba(255,255,255,0.3)" : "#fff",
+                    fontWeight: 800, fontSize: 16, cursor: !inStock ? "not-allowed" : "pointer",
+                    boxShadow: inStock ? (added ? "0 8px 24px rgba(16,185,129,0.3)" : "0 8px 28px rgba(245,158,11,0.35)") : "none",
+                    transition: "background 0.3s, box-shadow 0.3s", letterSpacing: 0.2
+                  }}
+                >
+                  {!inStock ? "Unavailable" : added ? "✓ Added to cart!" : `Add to Cart — ₹${(product.price * qty).toFixed(2)}`}
+                </motion.button>
+              </AnimatePresence>
+
+              {/* Wishlist heart toggle */}
               <motion.button
-                key={added ? "added" : "cart"}
-                initial={{ scale: 0.97 }} animate={{ scale: 1 }} exit={{ scale: 0.97 }}
-                whileHover={inStock ? { scale: 1.02 } : {}} whileTap={inStock ? { scale: 0.97 } : {}}
-                onClick={handleAddToCart}
-                disabled={!inStock}
+                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                onClick={() => isInWishlist(product._id) ? removeFromWishlist(product._id) : addToWishlist(product._id)}
                 style={{
-                  padding: "16px 36px", borderRadius: 14, border: "none",
-                  background: !inStock ? "rgba(255,255,255,0.1)" : added ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #f59e0b, #ef4444)",
-                  color: !inStock ? "rgba(255,255,255,0.3)" : "#fff",
-                  fontWeight: 800, fontSize: 16, cursor: !inStock ? "not-allowed" : "pointer",
-                  boxShadow: inStock ? (added ? "0 8px 24px rgba(16,185,129,0.3)" : "0 8px 28px rgba(245,158,11,0.35)") : "none",
-                  transition: "background 0.3s, box-shadow 0.3s", letterSpacing: 0.2
+                  width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)",
+                  background: isInWishlist(product._id) ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.06)",
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "all 0.3s",
+                  flexShrink: 0,
                 }}
+                title={isInWishlist(product._id) ? "Remove from wishlist" : "Add to wishlist"}
               >
-                {!inStock ? "Unavailable" : added ? "✓ Added to cart!" : `Add to Cart — ₹${(product.price * qty).toFixed(2)}`}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill={isInWishlist(product._id) ? "#ef4444" : "none"}>
+                  <path d="M12 21C12 21 3 14 3 8.5a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-9 12.5-9 12.5z"
+                    stroke={isInWishlist(product._id) ? "#ef4444" : "rgba(255,255,255,0.5)"}
+                    strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </motion.button>
-            </AnimatePresence>
+            </div>
           </motion.div>
         </div>
 

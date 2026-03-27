@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 
+
 const glassCard = {
   background: "rgba(255,255,255,0.04)",
   border: "1px solid rgba(255,255,255,0.08)",
@@ -50,31 +51,39 @@ const Checkout = () => {
     0
   );
 
- const placeOrderHandler = async () => {
-  try {
-    const { data } = await api.post("/orders", {
-      orderItems: cartItems.map((item) => ({
-        name: item.name,
-        qty: item.qty,
-        price: item.price,
-        image: item.image,
-        product: item._id,
-      })),
-      shippingAddress: {
-        address,
-        city,
-        postalCode,
-        country,
-      },
-      totalPrice,
-    });
+  const [loading, setLoading] = useState(false);
 
-    alert("Order placed successfully 🎉");
-    navigate("/myorders");
-  } catch (error) {
-    alert("Order failed");
-  }
-};
+  const placeOrderHandler = async () => {
+    if (!address || !city || !postalCode || !country) {
+      alert("Please fill all shipping fields");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { data } = await api.post("/orders/checkout-session", {
+        orderItems: cartItems.map((item) => ({
+          name: item.name,
+          qty: item.qty,
+          price: item.price,
+          image: item.image,
+          product: item._id,
+        })),
+        shippingAddress: {
+          address,
+          city,
+          postalCode,
+          country,
+        },
+        totalPrice,
+      });
+
+      // Redirect to Stripe Checkout
+      window.location.href = data.url;
+    } catch (error) {
+      alert("Failed to initiate payment. Please try again.");
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -178,24 +187,28 @@ const Checkout = () => {
 
             <button
               onClick={placeOrderHandler}
+              disabled={loading || cartItems.length === 0}
               style={{
                 width: "100%",
                 padding: "14px",
                 borderRadius: 12,
                 border: "none",
-                background: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+                background: loading
+                  ? "rgba(255,255,255,0.1)"
+                  : "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
                 color: "#fff",
                 fontWeight: 700,
                 fontSize: 15,
-                cursor: "pointer",
+                cursor: loading ? "not-allowed" : "pointer",
                 letterSpacing: 0.3,
-                boxShadow: "0 8px 24px rgba(245,158,11,0.3)",
+                boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)",
                 transition: "all 0.2s",
+                opacity: loading ? 0.6 : 1,
               }}
-              onMouseEnter={e => e.target.style.transform = "scale(1.02)"}
+              onMouseEnter={e => !loading && (e.target.style.transform = "scale(1.02)")}
               onMouseLeave={e => e.target.style.transform = "scale(1)"}
             >
-              Place Order
+              {loading ? "Redirecting to Stripe..." : "Pay with Stripe"}
             </button>
           </div>
 
