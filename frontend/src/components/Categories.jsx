@@ -4,7 +4,7 @@ import { CATEGORIES } from "../constants/categories";
 
 /* Category icons map */
 const CAT_META = {
-  Mobiles:      { icon: "📱", color: "#f59e0b", glow: "rgba(245,158,11,0.2)" },
+  Mobiles:      { icon: "📱", color: "#22d3ee", glow: "rgba(34, 211, 238,0.2)" },
   Laptops:      { icon: "💻", color: "#818cf8", glow: "rgba(129,140,248,0.2)" },
   Fashion:      { icon: "👗", color: "#f472b6", glow: "rgba(244,114,182,0.2)" },
   Appliances:   { icon: "🏠", color: "#34d399", glow: "rgba(52,211,153,0.2)" },
@@ -13,12 +13,12 @@ const CAT_META = {
   Cameras:      { icon: "📷", color: "#ef4444", glow: "rgba(239,68,68,0.2)"   },
   Gaming:       { icon: "🎮", color: "#a855f7", glow: "rgba(168,85,247,0.2)"  },
   Furniture:    { icon: "🛋️", color: "#84cc16", glow: "rgba(132,204,22,0.2)"  },
-  Books:        { icon: "📚", color: "#fbbf24", glow: "rgba(251,191,36,0.2)"  },
+  Books:        { icon: "📚", color: "#67e8f9", glow: "rgba(251,191,36,0.2)"  },
   Sports:       { icon: "⚽", color: "#22d3ee", glow: "rgba(34,211,238,0.2)"  },
   Groceries:    { icon: "🛒", color: "#4ade80", glow: "rgba(74,222,128,0.2)"  },
 };
 
-const fallback = { icon: "🏷️", color: "#f59e0b", glow: "rgba(245,158,11,0.2)" };
+const fallback = { icon: "🏷️", color: "#22d3ee", glow: "rgba(34, 211, 238,0.2)" };
 
 const CatCard = ({ cat, index }) => {
   const [hov, setHov] = useState(false);

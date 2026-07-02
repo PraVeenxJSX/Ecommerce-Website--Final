@@ -22,7 +22,7 @@ const ProductCard = ({ p, index = 0 }) => (
           background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
           borderRadius: 18, overflow: "hidden", transition: "all 0.28s", position: "relative"
         }}
-        onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.borderColor = "rgba(245,158,11,0.35)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.4)"; }}
+        onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.borderColor = "rgba(34, 211, 238,0.35)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.4)"; }}
         onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
       >
         <div style={{ overflow: "hidden", position: "relative" }}>
@@ -39,8 +39,8 @@ const ProductCard = ({ p, index = 0 }) => (
         <div style={{ padding: "12px 14px 16px" }}>
           <h3 style={{ color: "#fff", fontWeight: 700, fontSize: 14, margin: "0 0 6px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</h3>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ color: "#f59e0b", fontWeight: 900, fontSize: 16 }}>₹{p.price}</span>
-            <span style={{ background: "rgba(245,158,11,0.12)", color: "#fbbf24", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 100 }}>★ {p.rating?.toFixed(1) || "4.5"}</span>
+            <span style={{ color: "#22d3ee", fontWeight: 900, fontSize: 16 }}>₹{p.price}</span>
+            <span style={{ background: "rgba(34, 211, 238,0.12)", color: "#67e8f9", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 100 }}>★ {p.rating?.toFixed(1) || "4.5"}</span>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ const Home = () => {
           <section>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 28 }}>
               <div>
-                <p style={{ color: "#f59e0b", fontWeight: 700, fontSize: 12, letterSpacing: 1.5, textTransform: "uppercase", margin: "0 0 6px" }}>Handpicked</p>
+                <p style={{ color: "#22d3ee", fontWeight: 700, fontSize: 12, letterSpacing: 1.5, textTransform: "uppercase", margin: "0 0 6px" }}>Handpicked</p>
                 <h2 style={{ color: "#fff", fontSize: 30, fontWeight: 900, letterSpacing: -0.8, margin: 0, fontFamily: "'Playfair Display', Georgia, serif" }}>Featured Products</h2>
               </div>
             </div>
@@ -126,7 +126,7 @@ const Home = () => {
                         background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: 22, overflow: "hidden", transition: "all 0.28s"
                       }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.borderColor = "rgba(245,158,11,0.4)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(0,0,0,0.5)"; }}
+                      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.borderColor = "rgba(34, 211, 238,0.4)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(0,0,0,0.5)"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                     >
                       <img src={p.image} alt={p.name} style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }} />
@@ -134,7 +134,7 @@ const Home = () => {
                         <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 11, fontWeight: 600, letterSpacing: 0.8, textTransform: "uppercase", margin: "0 0 6px" }}>{p.category}</p>
                         <h3 style={{ color: "#fff", fontWeight: 700, fontSize: 16, margin: "0 0 12px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</h3>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                          <span style={{ color: "#f59e0b", fontWeight: 900, fontSize: 20 }}>₹{p.price}</span>
+                          <span style={{ color: "#22d3ee", fontWeight: 900, fontSize: 20 }}>₹{p.price}</span>
                           <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 13 }}>★ {p.rating?.toFixed(1) || "4.5"}</span>
                         </div>
                       </div>
@@ -158,11 +158,11 @@ const Home = () => {
                   <h2 style={{ color: "#fff", fontSize: 24, fontWeight: 800, letterSpacing: -0.5, margin: 0, fontFamily: "'Playfair Display', Georgia, serif" }}>{category}</h2>
                 </div>
                 <Link to={`/category/${category}`} style={{
-                  color: "#f59e0b", textDecoration: "none", fontSize: 14, fontWeight: 700,
-                  padding: "6px 16px", borderRadius: 100, border: "1px solid rgba(245,158,11,0.3)",
+                  color: "#22d3ee", textDecoration: "none", fontSize: 14, fontWeight: 700,
+                  padding: "6px 16px", borderRadius: 100, border: "1px solid rgba(34, 211, 238,0.3)",
                   transition: "all 0.2s"
                 }}
-                  onMouseEnter={e => { e.target.style.background = "rgba(245,158,11,0.1)"; }}
+                  onMouseEnter={e => { e.target.style.background = "rgba(34, 211, 238,0.1)"; }}
                   onMouseLeave={e => { e.target.style.background = "none"; }}
                 >View all →</Link>
               </div>

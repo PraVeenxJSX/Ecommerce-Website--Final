@@ -119,7 +119,7 @@ const CategoryBar = () => {
         boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
       }}>
         {/* Thin accent top line */}
-        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.3) 40%, rgba(99,102,241,0.3) 60%, transparent)" }} />
+        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(34, 211, 238,0.3) 40%, rgba(139,92,246,0.3) 60%, transparent)" }} />
 
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 12px", display: "flex", alignItems: "center", gap: 6, height: 52 }}>
           {/* Left arrow */}
@@ -139,8 +139,8 @@ const CategoryBar = () => {
               {/* Sliding active indicator */}
               <div style={{
                 position: "absolute", bottom: 4, height: 2, borderRadius: 2,
-                background: "linear-gradient(90deg, #f59e0b, #ef4444)",
-                boxShadow: "0 0 8px rgba(245,158,11,0.6)",
+                background: "linear-gradient(90deg, #22d3ee, #8b5cf6)",
+                boxShadow: "0 0 8px rgba(34, 211, 238,0.6)",
                 transition: "left 0.35s cubic-bezier(0.22,1,0.36,1), width 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.2s",
                 pointerEvents: "none", zIndex: 2,
                 ...indicatorStyle,

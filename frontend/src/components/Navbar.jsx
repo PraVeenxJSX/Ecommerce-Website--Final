@@ -4,12 +4,13 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { CATEGORIES } from "../constants/categories";
+import { BrandMark, BrandWordmark } from "./BrandLogo";
 
 /* ═══════════════════════════════════════════════════════
    CATEGORY META — icons + accent colours
 ═══════════════════════════════════════════════════════ */
 const CAT_META = {
-  Mobiles:    { icon: "📱", color: "#f59e0b" },
+  Mobiles:    { icon: "📱", color: "#22d3ee" },
   Laptops:    { icon: "💻", color: "#818cf8" },
   Fashion:    { icon: "👗", color: "#f472b6" },
   Appliances: { icon: "🏠", color: "#34d399" },
@@ -18,50 +19,11 @@ const CAT_META = {
   Cameras:    { icon: "📷", color: "#ef4444" },
   Gaming:     { icon: "🎮", color: "#a855f7" },
   Furniture:  { icon: "🛋️", color: "#84cc16" },
-  Books:      { icon: "📚", color: "#fbbf24" },
+  Books:      { icon: "📚", color: "#67e8f9" },
   Sports:     { icon: "⚽", color: "#22d3ee" },
   Groceries:  { icon: "🛒", color: "#4ade80" },
 };
-const catMeta = (cat) => CAT_META[cat] || { icon: "🏷️", color: "#f59e0b" };
-
-/* ═══════════════════════════════════════════════════════
-   STATIC LOGO
-═══════════════════════════════════════════════════════ */
-const Logo = ({ size = 44 }) => (
-  <div style={{
-    width: size, height: size, borderRadius: 14, flexShrink: 0,
-    background: "linear-gradient(135deg, #f59e0b, #ef4444)",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: size * 0.45, fontWeight: 900, color: "#fff",
-    boxShadow: "0 4px 16px rgba(245,158,11,0.35)",
-    cursor: "pointer",
-  }}>V</div>
-);
-
-/* ═══════════════════════════════════════════════════════
-   WORDMARK
-═══════════════════════════════════════════════════════ */
-const VortexWordmark = ({ size = 26 }) => {
-  const [hov, setHov] = useState(false);
-  return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ display: "flex", alignItems: "baseline", gap: 0.5, userSelect: "none" }}>
-      {"VORTEX".split("").map((l, i) => (
-        <span key={i} style={{
-          fontFamily: "'Bebas Neue', Impact, sans-serif",
-          fontSize: size, fontWeight: 900, letterSpacing: 3, lineHeight: 1, display: "inline-block",
-          background: hov
-            ? `linear-gradient(135deg, #f59e0b ${i*16}%, #ef4444 ${i*16+50}%, #818cf8 ${i*16+100}%)`
-            : "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.82) 100%)",
-          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-          transform: hov ? `translateY(${Math.sin(i * 0.8) * -3}px)` : "none",
-          transition: `transform 0.3s ease ${i * 0.04}s, background 0.3s`,
-          filter: hov ? "drop-shadow(0 2px 8px rgba(245,158,11,0.5))" : "none",
-        }}>{l}</span>
-      ))}
-    </div>
-  );
-};
+const catMeta = (cat) => CAT_META[cat] || { icon: "🏷️", color: "#22d3ee" };
 
 /* ═══════════════════════════════════════════════════════
    ROTATING ANNOUNCEMENT BAR
@@ -86,10 +48,10 @@ const AnnouncementBar = ({ onDismiss }) => {
     <div style={{ position: "relative", height: 36,
       background: "linear-gradient(90deg, #120800, #0d0b1c, #08101e, #0d0b1c, #120800)",
       display: "flex", alignItems: "center", justifyContent: "center",
-      borderBottom: "1px solid rgba(245,158,11,0.13)", overflow: "hidden" }}>
+      borderBottom: "1px solid rgba(34, 211, 238,0.13)", overflow: "hidden" }}>
       {/* shimmer sweep */}
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.05) 50%, transparent 100%)",
+        background: "linear-gradient(90deg, transparent 0%, rgba(34, 211, 238,0.05) 50%, transparent 100%)",
         animation: "ann-sweep 4s linear infinite" }} />
       <p style={{ margin: 0, fontSize: 12.5, fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
         letterSpacing: 0.35, color: "rgba(255,255,255,0.72)",
@@ -115,7 +77,7 @@ const MegaMenu = ({ open, onLinkClick }) => (
     background: "rgba(8, 8, 20, 0.99)", backdropFilter: "blur(36px)",
     border: "1px solid rgba(255,255,255,0.09)",
     borderRadius: 22,
-    boxShadow: "0 36px 96px rgba(0,0,0,0.8), 0 0 0 1px rgba(245,158,11,0.07)",
+    boxShadow: "0 36px 96px rgba(0,0,0,0.8), 0 0 0 1px rgba(34, 211, 238,0.07)",
     padding: "26px 28px 30px",
     opacity: open ? 1 : 0,
     transform: open ? "translateX(-50%) translateY(0) scale(1)" : "translateX(-50%) translateY(-10px) scale(0.98)",
@@ -125,7 +87,7 @@ const MegaMenu = ({ open, onLinkClick }) => (
   }}>
     {/* top accent */}
     <div style={{ height: 2, marginBottom: 22,
-      background: "linear-gradient(90deg, transparent, #f59e0b 28%, #ef4444 54%, #818cf8 78%, transparent)",
+      background: "linear-gradient(90deg, transparent, #22d3ee 28%, #ef4444 54%, #818cf8 78%, transparent)",
       borderRadius: 2 }} />
 
     <div style={{ display: "grid", gridTemplateColumns: "1fr 200px", gap: 28 }}>
@@ -160,18 +122,18 @@ const MegaMenu = ({ open, onLinkClick }) => (
 
         {/* Promo card */}
         <div style={{ borderRadius: 16, padding: "18px 16px",
-          background: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(239,68,68,0.07))",
-          border: "1px solid rgba(245,158,11,0.22)" }}>
+          background: "linear-gradient(135deg, rgba(34, 211, 238,0.12), rgba(239,68,68,0.07))",
+          border: "1px solid rgba(34, 211, 238,0.22)" }}>
           <div style={{ fontSize: 30, marginBottom: 8 }}>🔥</div>
-          <div style={{ color: "#fbbf24", fontSize: 10, fontWeight: 700, letterSpacing: 1.2,
+          <div style={{ color: "#67e8f9", fontSize: 10, fontWeight: 700, letterSpacing: 1.2,
             textTransform: "uppercase", fontFamily: "'DM Sans'", marginBottom: 4 }}>Flash Sale</div>
           <div style={{ color: "#fff", fontSize: 17, fontWeight: 800, lineHeight: 1.25,
             fontFamily: "'DM Sans'", marginBottom: 12 }}>Up to 60% off — today only</div>
           <Link to="/search?q=sale" onClick={onLinkClick} style={{
             display: "inline-block", padding: "8px 16px", borderRadius: 100,
-            background: "linear-gradient(135deg,#f59e0b,#ef4444)",
+            background: "linear-gradient(135deg,#22d3ee,#ef4444)",
             color: "#fff", fontSize: 12, fontWeight: 700, fontFamily: "'DM Sans'",
-            textDecoration: "none", boxShadow: "0 4px 14px rgba(245,158,11,0.38)" }}>Shop now →</Link>
+            textDecoration: "none", boxShadow: "0 4px 14px rgba(34, 211, 238,0.38)" }}>Shop now →</Link>
         </div>
 
         {/* Quick links */}
@@ -230,26 +192,26 @@ const SearchOverlay = ({ open, onClose }) => {
       <div style={{ width: "min(680px, 90vw)", animation: "so-up 0.24s cubic-bezier(0.22,1,0.36,1)" }}>
         {/* Input row */}
         <div style={{ display: "flex", alignItems: "center", gap: 0,
-          background: "rgba(255,255,255,0.07)", border: "1.5px solid rgba(245,158,11,0.45)",
+          background: "rgba(255,255,255,0.07)", border: "1.5px solid rgba(34, 211, 238,0.45)",
           borderRadius: 20, padding: "0 14px",
-          boxShadow: "0 0 0 5px rgba(245,158,11,0.07), 0 32px 72px rgba(0,0,0,0.6)",
+          boxShadow: "0 0 0 5px rgba(34, 211, 238,0.07), 0 32px 72px rgba(0,0,0,0.6)",
           marginBottom: 20 }}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, opacity: 0.55 }}>
-            <circle cx="9" cy="9" r="6.5" stroke="#f59e0b" strokeWidth="1.5" />
-            <path d="M14 14L18 18" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="9" cy="9" r="6.5" stroke="#22d3ee" strokeWidth="1.5" />
+            <path d="M14 14L18 18" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
           <input ref={inputRef} value={q} onChange={e => setQ(e.target.value)}
             onKeyDown={e => { if (e.key === "Enter") go(); }}
             placeholder="Search products, brands, categories…"
             style={{ flex: 1, background: "none", border: "none", outline: "none",
               fontSize: 20, color: "#fff", fontFamily: "'DM Sans', sans-serif",
-              padding: "20px 14px", caretColor: "#f59e0b" }} />
+              padding: "20px 14px", caretColor: "#22d3ee" }} />
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
             {q && (
               <button onClick={() => go()} style={{ padding: "8px 20px", borderRadius: 12, border: "none",
-                background: "linear-gradient(135deg,#f59e0b,#ef4444)",
+                background: "linear-gradient(135deg,#22d3ee,#ef4444)",
                 color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans'",
-                cursor: "pointer", boxShadow: "0 4px 16px rgba(245,158,11,0.4)" }}>Search</button>
+                cursor: "pointer", boxShadow: "0 4px 16px rgba(34, 211, 238,0.4)" }}>Search</button>
             )}
             <button onClick={onClose} style={{ padding: "5px 9px", borderRadius: 8,
               background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.11)",
@@ -269,7 +231,7 @@ const SearchOverlay = ({ open, onClose }) => {
                 padding: "7px 16px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)",
                 background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.62)",
                 fontSize: 13, fontFamily: "'DM Sans'", fontWeight: 500, cursor: "pointer", transition: "all 0.17s" }}
-                onMouseEnter={e => { e.target.style.background = "rgba(245,158,11,0.13)"; e.target.style.borderColor = "rgba(245,158,11,0.32)"; e.target.style.color = "#fbbf24"; }}
+                onMouseEnter={e => { e.target.style.background = "rgba(34, 211, 238,0.13)"; e.target.style.borderColor = "rgba(34, 211, 238,0.32)"; e.target.style.color = "#67e8f9"; }}
                 onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.05)"; e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.color = "rgba(255,255,255,0.62)"; }}>
                 {t}
               </button>
@@ -333,16 +295,15 @@ const MobileDrawer = ({ open, onClose, user, logout, cartCount }) => {
 
         {/* top accent */}
         <div style={{ height: 2, flexShrink: 0,
-          background: "linear-gradient(90deg, #f59e0b, #ef4444 50%, #818cf8)" }} />
+          background: "linear-gradient(90deg, #22d3ee, #ef4444 50%, #818cf8)" }} />
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "18px 18px 14px", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <Logo size={36} />
+            <BrandMark size={36} />
             <div>
-              <VortexWordmark size={20} />
-              <div style={{ fontSize: 8, letterSpacing: 3, color: "rgba(245,158,11,0.5)", fontFamily: "'DM Sans'", textTransform: "uppercase", marginTop: -1 }}>Commerce</div>
+              <BrandWordmark size={20} />
             </div>
           </div>
           <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: 10, border: "1px solid rgba(255,255,255,0.11)",
@@ -357,12 +318,12 @@ const MobileDrawer = ({ open, onClose, user, logout, cartCount }) => {
 
         {/* User / auth card */}
         <div style={{ margin: "0 16px 16px", padding: "14px 16px", borderRadius: 14, flexShrink: 0,
-          background: user ? "linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.06))" : "rgba(255,255,255,0.04)",
-          border: `1px solid ${user ? "rgba(245,158,11,0.24)" : "rgba(255,255,255,0.08)"}` }}>
+          background: user ? "linear-gradient(135deg, rgba(34, 211, 238,0.1), rgba(239,68,68,0.06))" : "rgba(255,255,255,0.04)",
+          border: `1px solid ${user ? "rgba(34, 211, 238,0.24)" : "rgba(255,255,255,0.08)"}` }}>
           {user ? (
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 42, height: 42, borderRadius: "50%", flexShrink: 0,
-                background: "linear-gradient(135deg,#f59e0b,#ef4444)",
+                background: "linear-gradient(135deg,#22d3ee,#ef4444)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 18, fontWeight: 800, color: "#fff" }}>
                 {user.name?.[0]?.toUpperCase()}
@@ -377,7 +338,7 @@ const MobileDrawer = ({ open, onClose, user, logout, cartCount }) => {
               <p style={{ margin: 0, color: "rgba(255,255,255,0.45)", fontSize: 13, fontFamily: "'DM Sans'", textAlign: "center", marginBottom: 2 }}>Sign in to your account</p>
               <div style={{ display: "flex", gap: 8 }}>
                 <Link to="/login" onClick={onClose} style={{ flex: 1, textAlign: "center", padding: "11px", borderRadius: 11,
-                  background: "linear-gradient(135deg,#f59e0b,#ef4444)", color: "#fff",
+                  background: "linear-gradient(135deg,#22d3ee,#ef4444)", color: "#fff",
                   fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans'", textDecoration: "none" }}>Sign in</Link>
                 <Link to="/register" onClick={onClose} style={{ flex: 1, textAlign: "center", padding: "11px", borderRadius: 11,
                   background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
@@ -475,7 +436,7 @@ const AccountDropdown = ({ user, logout, onClose }) => (
     boxShadow: "0 30px 72px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04)",
     animation: "dd-open 0.2s cubic-bezier(0.22,1,0.36,1)", zIndex: 500 }}>
     {/* accent line */}
-    <div style={{ height: 2, background: "linear-gradient(90deg, #f59e0b, #ef4444 55%, #818cf8)" }} />
+    <div style={{ height: 2, background: "linear-gradient(90deg, #22d3ee, #ef4444 55%, #818cf8)" }} />
 
     {user ? (
       <>
@@ -483,10 +444,10 @@ const AccountDropdown = ({ user, logout, onClose }) => (
         <div style={{ padding: "14px 16px 12px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
             <div style={{ width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
-              background: "linear-gradient(135deg,#f59e0b,#ef4444)",
+              background: "linear-gradient(135deg,#22d3ee,#ef4444)",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 17, fontWeight: 800, color: "#fff",
-              boxShadow: "0 4px 14px rgba(245,158,11,0.35)" }}>
+              boxShadow: "0 4px 14px rgba(34, 211, 238,0.35)" }}>
               {user.name?.[0]?.toUpperCase()}
             </div>
             <div style={{ minWidth: 0 }}>
@@ -504,10 +465,10 @@ const AccountDropdown = ({ user, logout, onClose }) => (
             className="dd-item-vx"
             style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px",
               fontSize: 14, fontWeight: 500, fontFamily: "'DM Sans'",
-              color: highlight ? "#fbbf24" : "rgba(255,255,255,0.7)", textDecoration: "none",
+              color: highlight ? "#67e8f9" : "rgba(255,255,255,0.7)", textDecoration: "none",
               transition: "all 0.15s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.color = highlight ? "#f59e0b" : "#fff"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = highlight ? "#fbbf24" : "rgba(255,255,255,0.7)"; }}>
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.color = highlight ? "#22d3ee" : "#fff"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = highlight ? "#67e8f9" : "rgba(255,255,255,0.7)"; }}>
             <span style={{ fontSize: 16 }}>{ic}</span>{lb}
           </Link>
         ))}
@@ -532,9 +493,9 @@ const AccountDropdown = ({ user, logout, onClose }) => (
           fontFamily: "'DM Sans'", textAlign: "center" }}>Sign in to your account</p>
         <Link to="/login" onClick={onClose} style={{ display: "block", textAlign: "center",
           padding: "12px", borderRadius: 12, marginBottom: 8,
-          background: "linear-gradient(135deg,#f59e0b,#ef4444)",
+          background: "linear-gradient(135deg,#22d3ee,#ef4444)",
           color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans'",
-          textDecoration: "none", boxShadow: "0 4px 16px rgba(245,158,11,0.36)" }}>Sign in</Link>
+          textDecoration: "none", boxShadow: "0 4px 16px rgba(34, 211, 238,0.36)" }}>Sign in</Link>
         <Link to="/register" onClick={onClose} style={{ display: "block", textAlign: "center",
           padding: "11px", borderRadius: 12,
           background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
@@ -625,8 +586,8 @@ const Navbar = () => {
         }
         .vx-search-bar.focused {
           background: rgba(255,255,255,0.09);
-          border-color: rgba(245,158,11,0.42);
-          box-shadow: 0 0 0 4px rgba(245,158,11,0.08);
+          border-color: rgba(34, 211, 238,0.42);
+          box-shadow: 0 0 0 4px rgba(34, 211, 238,0.08);
         }
         .vx-search-bar input {
           flex: 1; background: none; border: none; outline: none;
@@ -639,14 +600,14 @@ const Navbar = () => {
         .vx-cart {
           display: flex; align-items: center; gap: 8px;
           padding: 9px 20px; border-radius: 100px;
-          background: rgba(245,158,11,0.11); border: 1px solid rgba(245,158,11,0.24);
-          color: #fbbf24; font-size: 14px; font-weight: 600;
+          background: rgba(34, 211, 238,0.11); border: 1px solid rgba(34, 211, 238,0.24);
+          color: #67e8f9; font-size: 14px; font-weight: 600;
           text-decoration: none; transition: all 0.25s;
           font-family: 'DM Sans', sans-serif; white-space: nowrap; flex-shrink: 0;
         }
         .vx-cart:hover {
-          background: rgba(245,158,11,0.22); border-color: rgba(245,158,11,0.52);
-          transform: translateY(-1px); box-shadow: 0 6px 22px rgba(245,158,11,0.22);
+          background: rgba(34, 211, 238,0.22); border-color: rgba(34, 211, 238,0.52);
+          transform: translateY(-1px); box-shadow: 0 6px 22px rgba(34, 211, 238,0.22);
         }
 
         /* ---- account button ---- */
@@ -689,7 +650,7 @@ const Navbar = () => {
         .vx-nav-link::after {
           content: ''; position: absolute; bottom: -2px; left: 0;
           width: 0; height: 1.5px; border-radius: 2px;
-          background: linear-gradient(90deg, #f59e0b, #ef4444); transition: width 0.3s ease;
+          background: linear-gradient(90deg, #22d3ee, #8b5cf6); transition: width 0.3s ease;
         }
         .vx-nav-link:hover { color: #fff; }
         .vx-nav-link:hover::after { width: 100%; }
@@ -714,7 +675,7 @@ const Navbar = () => {
       }}>
         {/* top accent */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2,
-          background: "linear-gradient(90deg, transparent, #f59e0b 26%, #ef4444 52%, #818cf8 78%, transparent)",
+          background: "linear-gradient(90deg, transparent, #22d3ee 26%, #8b5cf6 52%, #818cf8 78%, transparent)",
           opacity: 0.88 }} />
 
         <div style={{ maxWidth: 1440, margin: "0 auto", padding: "0 22px",
@@ -729,11 +690,9 @@ const Navbar = () => {
 
           {/* ── Logo ── */}
           <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", flexShrink: 0 }}>
-            <Logo size={44} />
+            <BrandMark size={44} />
             <div className="vx-hide-sm">
-              <VortexWordmark size={25} />
-              <span style={{ fontSize: 9.5, letterSpacing: 3.5, color: "rgba(245,158,11,0.55)",
-                fontFamily: "'DM Sans'", fontWeight: 700, textTransform: "uppercase", display: "block", marginTop: -2 }}>Commerce</span>
+              <BrandWordmark size={25} />
             </div>
           </Link>
 
@@ -772,8 +731,8 @@ const Navbar = () => {
               onClick={() => setSearchOpen(true)}>
               <svg width="15" height="15" viewBox="0 0 20 20" fill="none"
                 style={{ marginRight: 8, flexShrink: 0, opacity: searchFocus ? 0.8 : 0.38 }}>
-                <circle cx="9" cy="9" r="6.5" stroke={searchFocus ? "#f59e0b" : "rgba(255,255,255,0.6)"} strokeWidth="1.5" />
-                <path d="M14 14L18 18" stroke={searchFocus ? "#f59e0b" : "rgba(255,255,255,0.6)"} strokeWidth="1.5" strokeLinecap="round" />
+                <circle cx="9" cy="9" r="6.5" stroke={searchFocus ? "#22d3ee" : "rgba(255,255,255,0.6)"} strokeWidth="1.5" />
+                <path d="M14 14L18 18" stroke={searchFocus ? "#22d3ee" : "rgba(255,255,255,0.6)"} strokeWidth="1.5" strokeLinecap="round" />
               </svg>
               <span style={{ flex: 1, fontSize: 14, color: "rgba(255,255,255,0.3)", fontFamily: "'DM Sans'" }}>
                 Search products, brands…
@@ -817,9 +776,9 @@ const Navbar = () => {
             {/* Cart */}
             <Link to="/cart" className="vx-cart">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <line x1="3" y1="6" x2="21" y2="6" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M16 10a4 4 0 01-8 0" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <line x1="3" y1="6" x2="21" y2="6" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M16 10a4 4 0 01-8 0" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="vx-hide-sm">Cart</span>
               {cartCount > 0 && (
@@ -837,10 +796,10 @@ const Navbar = () => {
             <div ref={acctRef} style={{ position: "relative" }}>
               <button className="vx-acct" onClick={() => setAccountOpen(v => !v)} aria-haspopup="true" aria-expanded={accountOpen}>
                 <div style={{ width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
-                  background: user ? "linear-gradient(135deg,#f59e0b,#ef4444)" : "rgba(255,255,255,0.14)",
+                  background: user ? "linear-gradient(135deg,#22d3ee,#8b5cf6)" : "rgba(255,255,255,0.14)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: 13, fontWeight: 800, color: "#fff",
-                  boxShadow: user ? "0 2px 10px rgba(245,158,11,0.4)" : "none" }}>
+                  boxShadow: user ? "0 2px 10px rgba(34, 211, 238,0.4)" : "none" }}>
                   {user ? user.name?.[0]?.toUpperCase() : (
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                       <circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" />

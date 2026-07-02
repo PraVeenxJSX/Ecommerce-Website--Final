@@ -18,7 +18,7 @@ const VerifyOtp = () => {
       <div className="relative min-h-screen w-full overflow-hidden flex items-center justify-center" style={{ background: "#0a0a0f" }}>
         <div style={{
           position: "absolute", width: 600, height: 600, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(34, 211, 238,0.12) 0%, transparent 70%)",
           top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none"
         }} />
         <motion.div
@@ -35,7 +35,7 @@ const VerifyOtp = () => {
         >
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 15 }}>
             Email missing. Please{" "}
-            <a href="/register" style={{ color: "#f59e0b", textDecoration: "none", fontWeight: 600 }}>register again</a>.
+            <a href="/register" style={{ color: "#22d3ee", textDecoration: "none", fontWeight: 600 }}>register again</a>.
           </p>
         </motion.div>
       </div>
@@ -78,7 +78,7 @@ const VerifyOtp = () => {
       {/* Ambient glow blobs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(34, 211, 238,0.12) 0%, transparent 70%)",
         top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none"
       }} />
       <div style={{
@@ -110,10 +110,10 @@ const VerifyOtp = () => {
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
           <div style={{
             width: 48, height: 48, borderRadius: 14,
-            background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+            background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: 22, fontWeight: 900, color: "#fff", letterSpacing: -1,
-            boxShadow: "0 8px 24px rgba(245,158,11,0.35)"
+            boxShadow: "0 8px 24px rgba(34, 211, 238,0.35)"
           }}>S</div>
         </div>
 
@@ -141,7 +141,7 @@ const VerifyOtp = () => {
                 color: "#fff", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box",
                 textAlign: "center", letterSpacing: 6
               }}
-              onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+              onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
               onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
             />
           </div>
@@ -163,9 +163,9 @@ const VerifyOtp = () => {
             type="submit" disabled={loading}
             style={{
               marginTop: 8, width: "100%", padding: "14px", borderRadius: 12, border: "none",
-              background: loading ? "rgba(245,158,11,0.4)" : "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+              background: loading ? "rgba(34, 211, 238,0.4)" : "linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%)",
               color: "#fff", fontWeight: 700, fontSize: 15, cursor: loading ? "not-allowed" : "pointer",
-              letterSpacing: 0.3, boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)", transition: "all 0.2s"
+              letterSpacing: 0.3, boxShadow: loading ? "none" : "0 8px 24px rgba(34, 211, 238,0.3)", transition: "all 0.2s"
             }}
           >
             {loading ? "Verifying..." : "Verify ->"}
@@ -180,7 +180,7 @@ const VerifyOtp = () => {
             disabled={resending}
             style={{
               background: "none", border: "none", cursor: resending ? "not-allowed" : "pointer",
-              color: resending ? "rgba(255,255,255,0.25)" : "#f59e0b",
+              color: resending ? "rgba(255,255,255,0.25)" : "#22d3ee",
               fontSize: 14, fontWeight: 600, transition: "color 0.2s"
             }}
           >

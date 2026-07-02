@@ -17,9 +17,9 @@ const Cart = () => {
         <h2 style={{ color: "#fff", fontSize: 28, fontWeight: 800, marginBottom: 12, fontFamily: "'Playfair Display', Georgia, serif" }}>Your cart is empty</h2>
         <p style={{ color: "rgba(255,255,255,0.4)", marginBottom: 28, fontSize: 15 }}>Looks like you haven't added anything yet.</p>
         <Link to="/" style={{
-          padding: "12px 28px", borderRadius: 100, background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+          padding: "12px 28px", borderRadius: 100, background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
           color: "#fff", textDecoration: "none", fontWeight: 700, fontSize: 15,
-          boxShadow: "0 8px 24px rgba(245,158,11,0.3)"
+          boxShadow: "0 8px 24px rgba(34, 211, 238,0.3)"
         }}>Start shopping →</Link>
       </div>
     );
@@ -92,7 +92,7 @@ const Cart = () => {
                   </div>
 
                   <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
-                    <span style={{ color: "#f59e0b", fontWeight: 800, fontSize: 18 }}>₹{(item.price * item.qty).toFixed(2)}</span>
+                    <span style={{ color: "#22d3ee", fontWeight: 800, fontSize: 18 }}>₹{(item.price * item.qty).toFixed(2)}</span>
                     <button
                       onClick={() => removeFromCart(item._id)}
                       style={{
@@ -134,7 +134,7 @@ const Cart = () => {
             </div>
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 14, display: "flex", justifyContent: "space-between" }}>
               <span style={{ color: "#fff", fontWeight: 700 }}>Total</span>
-              <span style={{ color: "#f59e0b", fontWeight: 900, fontSize: 20 }}>₹{totalPrice.toFixed(2)}</span>
+              <span style={{ color: "#22d3ee", fontWeight: 900, fontSize: 20 }}>₹{totalPrice.toFixed(2)}</span>
             </div>
           </div>
 
@@ -143,9 +143,9 @@ const Cart = () => {
             onClick={() => navigate("/checkout")}
             style={{
               width: "100%", padding: "15px", borderRadius: 14, border: "none",
-              background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+              background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
               color: "#fff", fontWeight: 800, fontSize: 15, cursor: "pointer",
-              boxShadow: "0 8px 28px rgba(245,158,11,0.35)", letterSpacing: 0.2
+              boxShadow: "0 8px 28px rgba(34, 211, 238,0.35)", letterSpacing: 0.2
             }}
           >Proceed to Checkout →</motion.button>
 

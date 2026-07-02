@@ -124,7 +124,7 @@ const ForgotPassword = () => {
             <div key={i} style={{
               width: step === i ? 32 : 8, height: 8, borderRadius: 100,
               background: step >= i
-                ? "linear-gradient(135deg, #f59e0b, #ef4444)"
+                ? "linear-gradient(135deg, #22d3ee, #8b5cf6)"
                 : "rgba(255,255,255,0.1)",
               transition: "all 0.3s",
             }} />
@@ -150,7 +150,7 @@ const ForgotPassword = () => {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 style={inputStyle}
-                onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>
@@ -164,9 +164,9 @@ const ForgotPassword = () => {
               type="submit" disabled={loading}
               style={{
                 marginTop: 8, width: "100%", padding: "14px", borderRadius: 12, border: "none",
-                background: loading ? "rgba(245,158,11,0.4)" : "linear-gradient(135deg, #f59e0b, #ef4444)",
+                background: loading ? "rgba(34, 211, 238,0.4)" : "linear-gradient(135deg, #22d3ee, #8b5cf6)",
                 color: "#fff", fontWeight: 700, fontSize: 15, cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)", transition: "all 0.2s"
+                boxShadow: loading ? "none" : "0 8px 24px rgba(34, 211, 238,0.3)", transition: "all 0.2s"
               }}
             >
               {loading ? "Sending..." : "Send OTP"}
@@ -184,7 +184,7 @@ const ForgotPassword = () => {
                 onChange={e => setOtp(e.target.value.replace(/\D/g, ""))}
                 placeholder="Enter 6-digit OTP"
                 style={{ ...inputStyle, textAlign: "center", fontSize: 22, letterSpacing: 8 }}
-                onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>
@@ -198,9 +198,9 @@ const ForgotPassword = () => {
               type="submit"
               style={{
                 marginTop: 8, width: "100%", padding: "14px", borderRadius: 12, border: "none",
-                background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+                background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
                 color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer",
-                boxShadow: "0 8px 24px rgba(245,158,11,0.3)", transition: "all 0.2s"
+                boxShadow: "0 8px 24px rgba(34, 211, 238,0.3)", transition: "all 0.2s"
               }}
             >
               Continue
@@ -229,7 +229,7 @@ const ForgotPassword = () => {
                   onChange={e => setNewPassword(e.target.value)}
                   placeholder="Min. 8 characters"
                   style={{ ...inputStyle, paddingRight: 48 }}
-                  onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                   onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
                 />
                 <button type="button" onClick={() => setShowPw(!showPw)} style={{
@@ -246,7 +246,7 @@ const ForgotPassword = () => {
                 onChange={e => setConfirmPassword(e.target.value)}
                 placeholder="Re-enter password"
                 style={inputStyle}
-                onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>
@@ -260,9 +260,9 @@ const ForgotPassword = () => {
               type="submit" disabled={loading}
               style={{
                 marginTop: 8, width: "100%", padding: "14px", borderRadius: 12, border: "none",
-                background: loading ? "rgba(245,158,11,0.4)" : "linear-gradient(135deg, #f59e0b, #ef4444)",
+                background: loading ? "rgba(34, 211, 238,0.4)" : "linear-gradient(135deg, #22d3ee, #8b5cf6)",
                 color: "#fff", fontWeight: 700, fontSize: 15, cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)", transition: "all 0.2s"
+                boxShadow: loading ? "none" : "0 8px 24px rgba(34, 211, 238,0.3)", transition: "all 0.2s"
               }}
             >
               {loading ? "Resetting..." : "Reset Password"}
@@ -272,7 +272,7 @@ const ForgotPassword = () => {
 
         <p style={{ textAlign: "center", color: "rgba(255,255,255,0.35)", fontSize: 14, marginTop: 28 }}>
           Remember your password?{" "}
-          <a href="/login" style={{ color: "#f59e0b", textDecoration: "none", fontWeight: 600 }}>Sign in</a>
+          <a href="/login" style={{ color: "#22d3ee", textDecoration: "none", fontWeight: 600 }}>Sign in</a>
         </p>
       </motion.div>
     </div>

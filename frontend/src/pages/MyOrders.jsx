@@ -69,14 +69,14 @@ const MyOrders = () => {
 
                 <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginBottom: 8 }}>
                   <span style={{ color: "rgba(255,255,255,0.4)" }}>Total:</span>{" "}
-                  <span style={{ color: "#f59e0b", fontWeight: 700 }}>₹{order.totalPrice}</span>
+                  <span style={{ color: "#22d3ee", fontWeight: 700 }}>₹{order.totalPrice}</span>
                 </p>
 
                 <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
                   <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
                     <span style={{ color: "rgba(255,255,255,0.4)" }}>Payment:</span>{" "}
                     <span style={{
-                      color: order.isPaid ? "#34d399" : "#f59e0b",
+                      color: order.isPaid ? "#34d399" : "#22d3ee",
                       fontWeight: 600,
                     }}>
                       {order.isPaid ? "Paid" : "Pending"}
@@ -91,7 +91,7 @@ const MyOrders = () => {
                   <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
                     <span style={{ color: "rgba(255,255,255,0.4)" }}>Delivery:</span>{" "}
                     <span style={{
-                      color: order.isDelivered ? "#34d399" : "#f59e0b",
+                      color: order.isDelivered ? "#34d399" : "#22d3ee",
                       fontWeight: 600,
                     }}>
                       {order.isDelivered ? "Delivered" : "Pending"}

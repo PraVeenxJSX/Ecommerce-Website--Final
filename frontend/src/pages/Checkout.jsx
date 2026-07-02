@@ -108,7 +108,7 @@ const Checkout = () => {
                   style={inputStyle}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                   onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
                 />
               </div>
@@ -121,7 +121,7 @@ const Checkout = () => {
                   style={inputStyle}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                   onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
                 />
               </div>
@@ -134,7 +134,7 @@ const Checkout = () => {
                   style={inputStyle}
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
-                  onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                   onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
                 />
               </div>
@@ -147,7 +147,7 @@ const Checkout = () => {
                   style={inputStyle}
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                   onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
                 />
               </div>
@@ -168,7 +168,7 @@ const Checkout = () => {
                   style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "rgba(255,255,255,0.6)" }}
                 >
                   <span>{item.name} × {item.qty}</span>
-                  <span style={{ color: "#f59e0b", fontWeight: 600 }}>₹{item.qty * item.price}</span>
+                  <span style={{ color: "#22d3ee", fontWeight: 600 }}>₹{item.qty * item.price}</span>
                 </div>
               ))}
             </div>
@@ -182,7 +182,7 @@ const Checkout = () => {
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 24, fontWeight: 700, fontSize: 18, color: "#fff" }}>
               <span>Total Price</span>
-              <span style={{ color: "#f59e0b" }}>₹{totalPrice.toFixed(2)}</span>
+              <span style={{ color: "#22d3ee" }}>₹{totalPrice.toFixed(2)}</span>
             </div>
 
             <button
@@ -195,13 +195,13 @@ const Checkout = () => {
                 border: "none",
                 background: loading
                   ? "rgba(255,255,255,0.1)"
-                  : "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+                  : "linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%)",
                 color: "#fff",
                 fontWeight: 700,
                 fontSize: 15,
                 cursor: loading ? "not-allowed" : "pointer",
                 letterSpacing: 0.3,
-                boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)",
+                boxShadow: loading ? "none" : "0 8px 24px rgba(34, 211, 238,0.3)",
                 transition: "all 0.2s",
                 opacity: loading ? 0.6 : 1,
               }}

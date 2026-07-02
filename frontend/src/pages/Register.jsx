@@ -53,7 +53,7 @@ const Register = () => {
       {/* Ambient glow blobs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(34, 211, 238,0.12) 0%, transparent 70%)",
         top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none"
       }} />
       <div style={{
@@ -85,10 +85,10 @@ const Register = () => {
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
           <div style={{
             width: 48, height: 48, borderRadius: 14,
-            background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+            background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: 22, fontWeight: 900, color: "#fff", letterSpacing: -1,
-            boxShadow: "0 8px 24px rgba(245,158,11,0.35)"
+            boxShadow: "0 8px 24px rgba(34, 211, 238,0.35)"
           }}>S</div>
         </div>
 
@@ -114,7 +114,7 @@ const Register = () => {
                 background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
                 color: "#fff", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box"
               }}
-              onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+              onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
               onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
             />
           </div>
@@ -131,7 +131,7 @@ const Register = () => {
                 background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
                 color: "#fff", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box"
               }}
-              onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+              onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
               onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
             />
           </div>
@@ -149,7 +149,7 @@ const Register = () => {
                   background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
                   color: "#fff", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box"
                 }}
-                onFocus={e => e.target.style.borderColor = "rgba(245,158,11,0.5)"}
+                onFocus={e => e.target.style.borderColor = "rgba(34, 211, 238,0.5)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
               <button type="button" onClick={() => setShowPw(!showPw)} style={{
@@ -165,9 +165,9 @@ const Register = () => {
             type="submit" disabled={loading}
             style={{
               marginTop: 8, width: "100%", padding: "14px", borderRadius: 12, border: "none",
-              background: loading ? "rgba(245,158,11,0.4)" : "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+              background: loading ? "rgba(34, 211, 238,0.4)" : "linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%)",
               color: "#fff", fontWeight: 700, fontSize: 15, cursor: loading ? "not-allowed" : "pointer",
-              letterSpacing: 0.3, boxShadow: loading ? "none" : "0 8px 24px rgba(245,158,11,0.3)", transition: "all 0.2s"
+              letterSpacing: 0.3, boxShadow: loading ? "none" : "0 8px 24px rgba(34, 211, 238,0.3)", transition: "all 0.2s"
             }}
           >
             {loading ? "Creating account..." : "Register ->"}
@@ -201,7 +201,7 @@ const Register = () => {
 
         <p style={{ textAlign: "center", color: "rgba(255,255,255,0.35)", fontSize: 14, marginTop: 28 }}>
           Already have an account?{" "}
-          <a href="/login" style={{ color: "#f59e0b", textDecoration: "none", fontWeight: 600 }}>Login</a>
+          <a href="/login" style={{ color: "#22d3ee", textDecoration: "none", fontWeight: 600 }}>Login</a>
         </p>
       </motion.div>
     </div>

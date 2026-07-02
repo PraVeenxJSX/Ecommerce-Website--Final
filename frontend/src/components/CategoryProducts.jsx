@@ -6,7 +6,7 @@ import { warmUpBackend } from "../services/api";
 
 /* ── Category meta ── */
 const CAT_META = {
-  Mobiles:    { icon: "📱", color: "#f59e0b", glow: "rgba(245,158,11,0.12)"   },
+  Mobiles:    { icon: "📱", color: "#22d3ee", glow: "rgba(34, 211, 238,0.12)"   },
   Laptops:    { icon: "💻", color: "#818cf8", glow: "rgba(129,140,248,0.12)"  },
   Fashion:    { icon: "👗", color: "#f472b6", glow: "rgba(244,114,182,0.12)"  },
   Appliances: { icon: "🏠", color: "#34d399", glow: "rgba(52,211,153,0.12)"   },
@@ -15,11 +15,11 @@ const CAT_META = {
   Cameras:    { icon: "📷", color: "#ef4444", glow: "rgba(239,68,68,0.12)"    },
   Gaming:     { icon: "🎮", color: "#a855f7", glow: "rgba(168,85,247,0.12)"   },
   Furniture:  { icon: "🛋️", color: "#84cc16", glow: "rgba(132,204,22,0.12)"   },
-  Books:      { icon: "📚", color: "#fbbf24", glow: "rgba(251,191,36,0.12)"   },
+  Books:      { icon: "📚", color: "#67e8f9", glow: "rgba(251,191,36,0.12)"   },
   Sports:     { icon: "⚽", color: "#22d3ee", glow: "rgba(34,211,238,0.12)"   },
   Groceries:  { icon: "🛒", color: "#4ade80", glow: "rgba(74,222,128,0.12)"   },
 };
-const fallbackMeta = { icon: "🏷️", color: "#f59e0b", glow: "rgba(245,158,11,0.12)" };
+const fallbackMeta = { icon: "🏷️", color: "#22d3ee", glow: "rgba(34, 211, 238,0.12)" };
 
 /* ── Skeleton card ── */
 const SkeletonCard = ({ i }) => (
@@ -113,7 +113,7 @@ const ProductCard = ({ p, index, accentColor }) => {
               <span style={{
                 position: "absolute", top: 10, right: 10,
                 background: "rgba(10,10,20,0.8)", backdropFilter: "blur(8px)",
-                color: "#fbbf24", fontSize: 11, fontWeight: 700,
+                color: "#67e8f9", fontSize: 11, fontWeight: 700,
                 padding: "3px 8px", borderRadius: 100,
                 fontFamily: "'DM Sans', sans-serif", display: "flex", alignItems: "center", gap: 3,
               }}>★ {p.rating.toFixed(1)}</span>
@@ -178,10 +178,10 @@ const SortBar = ({ count, sort, onSort }) => (
         <button key={val} onClick={() => onSort(val)} style={{
           padding: "6px 14px", borderRadius: 100, border: "none", cursor: "pointer",
           fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600,
-          background: sort === val ? "linear-gradient(135deg, #f59e0b, #ef4444)" : "rgba(255,255,255,0.06)",
+          background: sort === val ? "linear-gradient(135deg, #22d3ee, #8b5cf6)" : "rgba(255,255,255,0.06)",
           color: sort === val ? "#fff" : "rgba(255,255,255,0.45)",
           transition: "all 0.2s",
-          boxShadow: sort === val ? "0 4px 14px rgba(245,158,11,0.3)" : "none",
+          boxShadow: sort === val ? "0 4px 14px rgba(34, 211, 238,0.3)" : "none",
         }}>{label}</button>
       ))}
     </div>

@@ -40,7 +40,7 @@ const SearchResults = () => {
           <div style={{
             width: 40, height: 40, borderRadius: "50%",
             border: "3px solid rgba(255,255,255,0.1)",
-            borderTopColor: "#f59e0b",
+            borderTopColor: "#22d3ee",
             animation: "spin 0.8s linear infinite"
           }} />
           <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, fontWeight: 500 }}>Searching...</p>
@@ -54,7 +54,7 @@ const SearchResults = () => {
       {/* Ambient glow blobs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(34, 211, 238,0.08) 0%, transparent 70%)",
         top: -200, right: -100, filter: "blur(60px)", pointerEvents: "none"
       }} />
       <div style={{
@@ -114,8 +114,8 @@ const SearchResults = () => {
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.borderColor = "rgba(245,158,11,0.25)";
-                  e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.1)";
+                  e.currentTarget.style.borderColor = "rgba(34, 211, 238,0.25)";
+                  e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(34, 211, 238,0.1)";
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.transform = "translateY(0)";
@@ -152,7 +152,7 @@ const SearchResults = () => {
                     {p.category}
                   </p>
                   <p style={{
-                    color: "#f59e0b", fontWeight: 700, fontSize: 18,
+                    color: "#22d3ee", fontWeight: 700, fontSize: 18,
                     margin: 0
                   }}>
                     {"\u20B9"}{p.price}

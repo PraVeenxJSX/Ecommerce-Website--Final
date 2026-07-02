@@ -61,7 +61,7 @@ const ProductDetails = () => {
   return (
     <div style={{ background: "#0d0d14", minHeight: "100vh" }}>
       {/* Ambient blob */}
-      <div style={{ position: "fixed", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 65%)", top: 0, right: 0, filter: "blur(100px)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(34, 211, 238,0.07) 0%, transparent 65%)", top: 0, right: 0, filter: "blur(100px)", pointerEvents: "none", zIndex: 0 }} />
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px", position: "relative", zIndex: 1 }}>
         {/* Breadcrumb */}
@@ -93,7 +93,7 @@ const ProductDetails = () => {
           <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
             style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {/* Category */}
-            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: 100, fontSize: 12, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", background: "rgba(245,158,11,0.12)", color: "#fbbf24", border: "1px solid rgba(245,158,11,0.25)", width: "fit-content" }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", borderRadius: 100, fontSize: 12, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", background: "rgba(34, 211, 238,0.12)", color: "#67e8f9", border: "1px solid rgba(34, 211, 238,0.25)", width: "fit-content" }}>
               {product.category}
             </span>
 
@@ -106,14 +106,14 @@ const ProductDetails = () => {
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ display: "flex", gap: 2 }}>
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ color: i < stars ? "#f59e0b" : "rgba(255,255,255,0.15)", fontSize: 16 }}>★</span>
+                  <span key={i} style={{ color: i < stars ? "#22d3ee" : "rgba(255,255,255,0.15)", fontSize: 16 }}>★</span>
                 ))}
               </div>
               <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 14 }}>{rating} rating</span>
             </div>
 
             {/* Price */}
-            <div style={{ fontSize: 40, fontWeight: 900, background: "linear-gradient(135deg, #f59e0b, #ef4444)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: -1 }}>
+            <div style={{ fontSize: 40, fontWeight: 900, background: "linear-gradient(135deg, #22d3ee, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: -1 }}>
               ₹{product.price}
             </div>
 
@@ -151,10 +151,10 @@ const ProductDetails = () => {
                   disabled={!inStock}
                   style={{
                     padding: "16px 36px", borderRadius: 14, border: "none",
-                    background: !inStock ? "rgba(255,255,255,0.1)" : added ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #f59e0b, #ef4444)",
+                    background: !inStock ? "rgba(255,255,255,0.1)" : added ? "linear-gradient(135deg, #10b981, #059669)" : "linear-gradient(135deg, #22d3ee, #8b5cf6)",
                     color: !inStock ? "rgba(255,255,255,0.3)" : "#fff",
                     fontWeight: 800, fontSize: 16, cursor: !inStock ? "not-allowed" : "pointer",
-                    boxShadow: inStock ? (added ? "0 8px 24px rgba(16,185,129,0.3)" : "0 8px 28px rgba(245,158,11,0.35)") : "none",
+                    boxShadow: inStock ? (added ? "0 8px 24px rgba(16,185,129,0.3)" : "0 8px 28px rgba(34, 211, 238,0.35)") : "none",
                     transition: "background 0.3s, box-shadow 0.3s", letterSpacing: 0.2
                   }}
                 >
@@ -190,7 +190,7 @@ const ProductDetails = () => {
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
               <h2 style={{ color: "#fff", fontSize: 26, fontWeight: 800, letterSpacing: -0.5, fontFamily: "'Playfair Display', Georgia, serif", margin: 0 }}>You may also like</h2>
-              <Link to={`/category/${product.category}`} style={{ color: "#f59e0b", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>View all →</Link>
+              <Link to={`/category/${product.category}`} style={{ color: "#22d3ee", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>View all →</Link>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }} className="related-grid">
@@ -201,13 +201,13 @@ const ProductDetails = () => {
                       background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
                       borderRadius: 18, overflow: "hidden", transition: "all 0.25s"
                     }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.borderColor = "rgba(245,158,11,0.3)"; }}
+                      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.borderColor = "rgba(34, 211, 238,0.3)"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}
                     >
                       <img src={p.image} alt={p.name} style={{ width: "100%", height: 180, objectFit: "cover" }} />
                       <div style={{ padding: "16px" }}>
                         <h3 style={{ color: "#fff", fontWeight: 700, fontSize: 14, margin: "0 0 6px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</h3>
-                        <p style={{ color: "#f59e0b", fontWeight: 800, fontSize: 16, margin: 0 }}>₹{p.price}</p>
+                        <p style={{ color: "#22d3ee", fontWeight: 800, fontSize: 16, margin: 0 }}>₹{p.price}</p>
                       </div>
                     </div>
                   </Link>

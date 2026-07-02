@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-/* ── Static Logo ── */
-const FooterLogo = ({ size = 36 }) => (
-  <div style={{
-    width: size, height: size, borderRadius: 10, flexShrink: 0,
-    background: "linear-gradient(135deg, #f59e0b, #ef4444)",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: size * 0.45, fontWeight: 900, color: "#fff",
-    boxShadow: "0 4px 12px rgba(245,158,11,0.3)",
-  }}>V</div>
-);
+import { BrandMark, BrandWordmark } from "./BrandLogo";
 
 /* ── Newsletter form ── */
 const NewsletterForm = () => {
@@ -39,10 +29,10 @@ const NewsletterForm = () => {
       <div style={{
         flex: 1, display: "flex", alignItems: "center",
         background: "rgba(255,255,255,0.05)",
-        border: `1px solid ${focused ? "rgba(245,158,11,0.4)" : "rgba(255,255,255,0.1)"}`,
+        border: `1px solid ${focused ? "rgba(34, 211, 238,0.4)" : "rgba(255,255,255,0.1)"}`,
         borderRadius: 12, padding: "0 14px",
         transition: "border-color 0.2s",
-        boxShadow: focused ? "0 0 0 3px rgba(245,158,11,0.07)" : "none"
+        boxShadow: focused ? "0 0 0 3px rgba(34, 211, 238,0.07)" : "none"
       }}>
         <input
           type="email" value={email}
@@ -55,13 +45,13 @@ const NewsletterForm = () => {
       </div>
       <button type="submit" style={{
         padding: "11px 18px", borderRadius: 12, border: "none",
-        background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+        background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
         color: "#fff", fontWeight: 700, fontSize: 14, cursor: "pointer",
         fontFamily: "'DM Sans',sans-serif", flexShrink: 0,
-        boxShadow: "0 6px 16px rgba(245,158,11,0.3)", transition: "transform 0.2s, box-shadow 0.2s"
+        boxShadow: "0 6px 16px rgba(34, 211, 238,0.3)", transition: "transform 0.2s, box-shadow 0.2s"
       }}
-        onMouseEnter={e => { e.target.style.transform = "scale(1.05)"; e.target.style.boxShadow = "0 8px 22px rgba(245,158,11,0.45)"; }}
-        onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "0 6px 16px rgba(245,158,11,0.3)"; }}
+        onMouseEnter={e => { e.target.style.transform = "scale(1.05)"; e.target.style.boxShadow = "0 8px 22px rgba(34, 211, 238,0.45)"; }}
+        onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "0 6px 16px rgba(34, 211, 238,0.3)"; }}
       >Join</button>
     </form>
   );
@@ -94,7 +84,7 @@ const FootLink = ({ children, to = "/" }) => {
       <Link to={to}
         onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
         style={{
-          color: hov ? "#f59e0b" : "rgba(255,255,255,0.45)",
+          color: hov ? "#22d3ee" : "rgba(255,255,255,0.45)",
           textDecoration: "none", fontSize: 14,
           fontFamily: "'DM Sans',sans-serif",
           display: "inline-flex", alignItems: "center",
@@ -102,7 +92,7 @@ const FootLink = ({ children, to = "/" }) => {
           gap: hov ? "10px" : "6px"
         }}
       >
-        <span style={{ color: hov ? "#f59e0b" : "rgba(255,255,255,0.15)", fontSize: 10, transition: "color 0.2s" }}>›</span>
+        <span style={{ color: hov ? "#22d3ee" : "rgba(255,255,255,0.15)", fontSize: 10, transition: "color 0.2s" }}>›</span>
         {children}
       </Link>
     </li>
@@ -111,8 +101,6 @@ const FootLink = ({ children, to = "/" }) => {
 
 /* ── Main Footer ── */
 const Footer = () => {
-  const letters = "VORTEX".split("");
-
   return (
     <>
       <style>{`
@@ -156,7 +144,7 @@ const Footer = () => {
           content: '';
           display: block;
           width: 24px; height: 2px;
-          background: linear-gradient(90deg, #f59e0b, #ef4444);
+          background: linear-gradient(90deg, #22d3ee, #ef4444);
           border-radius: 2px;
           margin-top: 8px;
         }
@@ -166,17 +154,17 @@ const Footer = () => {
           font-family: 'DM Sans', sans-serif; text-decoration: none;
           transition: color 0.2s; cursor: pointer;
         }
-        .footer-bottom-link:hover { color: #f59e0b; }
+        .footer-bottom-link:hover { color: #22d3ee; }
       `}</style>
 
       <footer style={{ background: "#070710", position: "relative", overflow: "hidden", marginTop: 80 }}>
 
         {/* Ambient glows */}
-        <div style={{ position: "absolute", width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 65%)", top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(34, 211, 238,0.06) 0%, transparent 65%)", top: -100, left: -100, filter: "blur(60px)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", width: 500, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 65%)", bottom: 0, right: -80, filter: "blur(60px)", pointerEvents: "none" }} />
 
         {/* Top separator with glow */}
-        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.4) 30%, rgba(99,102,241,0.4) 60%, transparent)", marginBottom: 0 }} />
+        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(34, 211, 238,0.4) 30%, rgba(99,102,241,0.4) 60%, transparent)", marginBottom: 0 }} />
 
         {/* Main content */}
         <div style={{ maxWidth: 1360, margin: "0 auto", padding: "64px 40px 48px", position: "relative", zIndex: 1 }}>
@@ -186,20 +174,8 @@ const Footer = () => {
             <div className="footer-col">
               {/* Logo lockup */}
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-                <FooterLogo size={40} />
-                <div>
-                  <div style={{ display: "flex", gap: 1 }}>
-                    {letters.map((l, i) => (
-                      <span key={i} style={{
-                        fontFamily: "'Bebas Neue', Impact, sans-serif",
-                        fontSize: 22, letterSpacing: 2.5, lineHeight: 1,
-                        background: "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.75) 100%)",
-                        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
-                      }}>{l}</span>
-                    ))}
-                  </div>
-                  <div style={{ fontSize: 9, letterSpacing: 3, color: "rgba(245,158,11,0.55)", fontFamily: "'DM Sans',sans-serif", fontWeight: 600, textTransform: "uppercase", marginTop: 1 }}>Commerce</div>
-                </div>
+                <BrandMark size={40} />
+                <BrandWordmark size={22} />
               </div>
 
               <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, lineHeight: 1.8, fontFamily: "'DM Sans',sans-serif", marginBottom: 24, maxWidth: 280 }}>
@@ -247,8 +223,8 @@ const Footer = () => {
               </ul>
 
               {/* Contact card */}
-              <div style={{ marginTop: 24, padding: "14px 16px", borderRadius: 14, background: "rgba(245,158,11,0.07)", border: "1px solid rgba(245,158,11,0.15)" }}>
-                <div style={{ color: "#fbbf24", fontWeight: 700, fontSize: 13, fontFamily: "'DM Sans'", marginBottom: 4 }}>📞 24/7 Support</div>
+              <div style={{ marginTop: 24, padding: "14px 16px", borderRadius: 14, background: "rgba(34, 211, 238,0.07)", border: "1px solid rgba(34, 211, 238,0.15)" }}>
+                <div style={{ color: "#67e8f9", fontWeight: 700, fontSize: 13, fontFamily: "'DM Sans'", marginBottom: 4 }}>📞 24/7 Support</div>
                 <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, fontFamily: "'DM Sans'" }}>support@vortex.shop</div>
               </div>
             </div>
@@ -273,7 +249,7 @@ const Footer = () => {
                     </svg>
                   </SocialBtn>
                   {/* Instagram */}
-                  <SocialBtn color="linear-gradient(135deg,#f59e0b,#ef4444,#a855f7)" href="#">
+                  <SocialBtn color="linear-gradient(135deg,#22d3ee,#ef4444,#a855f7)" href="#">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                       <circle cx="12" cy="12" r="4.5"/>
@@ -307,7 +283,7 @@ const Footer = () => {
                       fontFamily: "'DM Sans'", letterSpacing: 0.5,
                       transition: "all 0.2s", cursor: "default"
                     }}
-                      onMouseEnter={e => { e.target.style.background = "rgba(245,158,11,0.1)"; e.target.style.borderColor = "rgba(245,158,11,0.3)"; e.target.style.color = "#fbbf24"; }}
+                      onMouseEnter={e => { e.target.style.background = "rgba(34, 211, 238,0.1)"; e.target.style.borderColor = "rgba(34, 211, 238,0.3)"; e.target.style.color = "#67e8f9"; }}
                       onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.07)"; e.target.style.borderColor = "rgba(255,255,255,0.1)"; e.target.style.color = "rgba(255,255,255,0.55)"; }}
                     >{p}</div>
                   ))}
@@ -323,9 +299,9 @@ const Footer = () => {
         {/* Bottom bar */}
         <div style={{ maxWidth: 1360, margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <FooterLogo size={22} />
+            <BrandMark size={22} />
             <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, fontFamily: "'DM Sans',sans-serif" }}>
-              © {new Date().getFullYear()} <span style={{ color: "rgba(245,158,11,0.6)", fontWeight: 700 }}>VORTEX</span> Commerce. All rights reserved.
+              © {new Date().getFullYear()} <span style={{ color: "rgba(34, 211, 238,0.6)", fontWeight: 700 }}>VORTEX</span> Commerce. All rights reserved.
             </span>
           </div>
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>

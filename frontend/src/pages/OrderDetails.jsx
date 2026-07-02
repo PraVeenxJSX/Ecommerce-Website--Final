@@ -96,7 +96,7 @@ const OrderDetails = () => {
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
             <span style={{ color: "rgba(255,255,255,0.4)" }}>Payment:</span>{" "}
             <span style={{
-              color: order.isPaid ? "#34d399" : "#f59e0b",
+              color: order.isPaid ? "#34d399" : "#22d3ee",
               fontWeight: 600,
             }}>
               {order.isPaid ? "Paid" : "Pending"}
@@ -110,7 +110,7 @@ const OrderDetails = () => {
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, margin: 0 }}>
             <span style={{ color: "rgba(255,255,255,0.4)" }}>Delivery:</span>{" "}
             <span style={{
-              color: order.isDelivered ? "#34d399" : "#f59e0b",
+              color: order.isDelivered ? "#34d399" : "#22d3ee",
               fontWeight: 600,
             }}>
               {order.isDelivered ? "Delivered" : "Pending"}
@@ -172,7 +172,7 @@ const OrderDetails = () => {
               </p>
             </div>
 
-            <div style={{ fontWeight: 700, color: "#f59e0b", fontSize: 16 }}>
+            <div style={{ fontWeight: 700, color: "#22d3ee", fontSize: 16 }}>
               ₹{item.qty * item.price}
             </div>
           </div>
@@ -188,7 +188,7 @@ const OrderDetails = () => {
         gap: 12,
       }}>
         <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 18, fontWeight: 600 }}>Total:</span>
-        <span style={{ color: "#f59e0b", fontSize: 24, fontWeight: 800 }}>₹{order.totalPrice}</span>
+        <span style={{ color: "#22d3ee", fontSize: 24, fontWeight: 800 }}>₹{order.totalPrice}</span>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const Wishlist = () => {
             Your wishlist is empty
           </p>
           <div style={{ textAlign: "center" }}>
-            <Link to="/" style={{ color: "#f59e0b", textDecoration: "none", fontWeight: 600, fontSize: 14 }}>
+            <Link to="/" style={{ color: "#22d3ee", textDecoration: "none", fontWeight: 600, fontSize: 14 }}>
               Browse products
             </Link>
           </div>
@@ -82,7 +82,7 @@ const Wishlist = () => {
                   <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, margin: "0 0 4px" }}>
                     {item.category}
                   </p>
-                  <p style={{ color: "#f59e0b", fontWeight: 800, fontSize: 18, margin: 0 }}>
+                  <p style={{ color: "#22d3ee", fontWeight: 800, fontSize: 18, margin: 0 }}>
                     ₹{item.price}
                   </p>
                 </div>
@@ -93,9 +93,9 @@ const Wishlist = () => {
                     onClick={() => { addToCart(item); }}
                     style={{
                       padding: "10px 20px", borderRadius: 10, border: "none",
-                      background: "linear-gradient(135deg, #f59e0b, #ef4444)",
+                      background: "linear-gradient(135deg, #22d3ee, #8b5cf6)",
                       color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer",
-                      boxShadow: "0 4px 16px rgba(245,158,11,0.3)",
+                      boxShadow: "0 4px 16px rgba(34, 211, 238,0.3)",
                       transition: "transform 0.2s",
                     }}
                     onMouseEnter={e => e.target.style.transform = "scale(1.05)"}

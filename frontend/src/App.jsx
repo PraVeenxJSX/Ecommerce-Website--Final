@@ -23,10 +23,11 @@ import VerifyOtp from "./pages/VerifyOtp";
 import ForgotPassword from "./pages/ForgotPassword";
 import SearchResults from "./pages/SearchResults";
 import Footer from "./components/Footer";
+import ChatbotWidget from "./components/ChatbotWidget";
 
 function App() {
   return (
-    <div className="min-h-screen overflow-hidden relative" style={{ background: "#0a0a0f" }}>
+    <div className="app-shell min-h-screen overflow-hidden relative">
       <BrowserRouter>
         <Navbar />
 
@@ -57,6 +58,7 @@ function App() {
         </Routes>
 
         <Footer />
+        <ChatbotWidget />
       </BrowserRouter>
     </div>
   );

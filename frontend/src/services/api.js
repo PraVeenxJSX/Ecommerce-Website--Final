@@ -48,6 +48,61 @@ export const warmUpBackend = () => {
 warmUpBackend();
 
 export default api;
+export const apiBaseURL = baseURL;
 
 // Helper: search products
 export const searchProducts = (q) => api.get(`/products/search?q=${encodeURIComponent(q)}`);
+
+export const streamChatResponse = async ({ message, history = [], onMeta, onDelta }) => {
+  const response = await fetch(`${baseURL}/chat`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message, history }),
+  });
+
+  if (!response.ok || !response.body) {
+    throw new Error("Chat service is unavailable");
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  const parseEvent = (eventBlock) => {
+    const data = eventBlock
+      .split("\n")
+      .filter((line) => line.startsWith("data:"))
+      .map((line) => line.slice(5).trim())
+      .join("\n");
+
+    if (!data) return;
+
+    const payload = JSON.parse(data);
+
+    if (payload.type === "meta" && onMeta) {
+      onMeta(payload);
+    }
+
+    if (payload.type === "delta" && onDelta) {
+      onDelta(payload.content || "");
+    }
+  };
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+
+    const events = buffer.split("\n\n");
+    buffer = events.pop() || "";
+
+    events.forEach(parseEvent);
+  }
+
+  if (buffer.trim()) {
+    parseEvent(buffer);
+  }
+};
